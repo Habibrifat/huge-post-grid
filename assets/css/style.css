@@ -1,0 +1,35 @@
+.custom-post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.post-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  background: #fff;
+}
+.post-thumbnail img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* pagination */
+.post-grid-pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.post-grid-pagination .page-numbers {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 0 2px;
+  border: 1px solid #ddd;
+}
+
+.post-grid-pagination .page-numbers.current {
+  background: #0073aa;
+  color: white;
+  border-color: #0073aa;
+}
