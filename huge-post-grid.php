@@ -47,50 +47,6 @@ add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts_callback');
 add_action('wp_ajax_load_more_posts', 'load_more_posts_callback');
 
 
-// test
-function load_more_posts_callback_test() {
-    check_ajax_referer('load_more_nonce', 'nonce');
-
-    $paged = isset($_POST['page']) ? intval($_POST['page']) + 1 : 2;
-    $posts_per_page = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 6;
-    $selected_category = sanitize_text_field($_POST['selected_category']);
-
-    $query_args = [
-        'post_type'      => 'post',
-        'post_status'    => 'publish',
-        'paged'          => $paged,
-        'posts_per_page' => $posts_per_page,
-    ];
-
-    if (!empty($selected_category)) {
-        $query_args['category_name'] = $selected_category;
-    }
-
-    $query = new WP_Query($query_args);
-
-    if ($query->have_posts()) {
-        ob_start();
-        while ($query->have_posts()) {
-            $query->the_post();
-            ?>
-            <div class="post-item">
-                <?php if (has_post_thumbnail()) : ?>
-                    <div class="post-thumbnail"><?php the_post_thumbnail('medium'); ?></div>
-                <?php endif; ?>
-                <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                <div class="post-content"><?php the_excerpt(); ?></div>
-            </div>
-            <?php
-        }
-        wp_reset_postdata();
-        echo ob_get_clean();
-    } else {
-        echo 0;
-    }
-
-    wp_die();
-}
-
 function load_more_posts_callback() {
     check_ajax_referer('load_more_nonce', 'nonce');
 
