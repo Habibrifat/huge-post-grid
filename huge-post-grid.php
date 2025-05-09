@@ -43,27 +43,65 @@ function post_grid_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'post_grid_enqueue_assets');
 
 
+// Include the renderers file from widgets folder
+require_once plugin_dir_path(__FILE__) . 'widgets/post-grid-renderers.php';
+
 add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts_callback');
 add_action('wp_ajax_load_more_posts', 'load_more_posts_callback');
 
 
+
 function load_more_posts_callback() {
+    require_once plugin_dir_path(__FILE__) . 'widgets/post-grid-renderers.php';
     check_ajax_referer('load_more_nonce', 'nonce');
 
+    // Get all parameters
     $page = isset($_POST['page']) ? intval($_POST['page']) : 2;
     $posts_per_page = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 6;
-    $selected_category = sanitize_text_field($_POST['selected_category']);
+    $selected_category = isset($_POST['selected_category']) ? sanitize_text_field($_POST['selected_category']) : '';
+    $post_style = isset($_POST['post_style']) ? sanitize_text_field($_POST['post_style']) : 'ep-style1';
 
-    $query_args = [
-        'post_type'      => 'post',
-        'post_status'    => 'publish',
-        'paged'          => $page,
-        'posts_per_page' => $posts_per_page,
+    // Get settings - either from direct POST or nested settings array
+    $settings = [
+        'show_image' => 'yes',
+        'show_category' => 'yes',
+        'show_content' => 'yes',
+        'show_author' => 'yes',
+        'show_date' => 'yes',
+        'image_size' => 'large',
+        'title_word_limit' => 10,
+        'content_word_limit' => 20
     ];
 
-    if (!empty($selected_category)) {
-        $query_args['category_name'] = $selected_category;
+    // Handle both flat and nested settings
+    if (isset($_POST['settings'])) {
+        if (is_array($_POST['settings'])) {
+            $settings = array_merge($settings, $_POST['settings']);
+        } else {
+            $decoded = json_decode(stripslashes($_POST['settings']), true);
+            if (is_array($decoded)) {
+                $settings = array_merge($settings, $decoded);
+            }
+        }
     }
+
+    // Check for individual settings in root of POST
+    foreach ($settings as $key => $default) {
+        if (isset($_POST[$key])) {
+            $settings[$key] = sanitize_text_field($_POST[$key]);
+        }
+    }
+
+    error_log('Final settings: ' . print_r($settings, true));
+
+    $query_args = [
+        'post_type' => 'post',
+        'post_status' => 'publish',
+        'paged' => $page,
+        'posts_per_page' => $posts_per_page,
+        'category_name' => $selected_category,
+        'ignore_sticky_posts' => true
+    ];
 
     $query = new WP_Query($query_args);
 
@@ -71,24 +109,19 @@ function load_more_posts_callback() {
         ob_start();
         while ($query->have_posts()) {
             $query->the_post();
-            ?>
-            <div class="post-item">
-                <?php if (has_post_thumbnail()) : ?>
-                    <div class="post-thumbnail"><?php the_post_thumbnail('medium'); ?></div>
-                <?php endif; ?>
-                <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                <div class="post-content"><?php the_excerpt(); ?></div>
-            </div>
-            <?php
+            ep_render_post_style($post_style, $settings);
         }
         wp_reset_postdata();
         echo ob_get_clean();
     } else {
         echo 0;
     }
-
     wp_die();
 }
+
+
+
+
 
 
 
