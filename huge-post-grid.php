@@ -59,7 +59,7 @@ function load_more_posts_callback() {
     $page = isset($_POST['page']) ? intval($_POST['page']) : 2;
     $posts_per_page = isset($_POST['posts_per_page']) ? intval($_POST['posts_per_page']) : 6;
     $selected_category = isset($_POST['selected_category']) ? sanitize_text_field($_POST['selected_category']) : '';
-    $post_style = isset($_POST['post_style']) ? sanitize_text_field($_POST['post_style']) : 'ep-style1';
+    $post_style = isset($_POST['post_style']) ? sanitize_text_field($_POST['post_style']) : 'huge-style1';
 
     // Get settings - either from direct POST or nested settings array
     $settings = [
@@ -70,7 +70,7 @@ function load_more_posts_callback() {
         'show_date' => 'yes',
         'image_size' => 'large',
         'title_word_limit' => 10,
-        'content_word_limit' => 20
+        'content_word_limit' => 20,
     ];
 
     // Handle both flat and nested settings

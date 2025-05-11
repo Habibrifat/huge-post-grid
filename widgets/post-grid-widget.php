@@ -41,18 +41,18 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
                 'label' => __('Post Design Style', 'elementor-post-grid'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    'style1' => __('Design 1 - Card', 'elementor-post-grid'),
-                    'style2' => __('Design 2 - Card Overlay', 'elementor-post-grid'),
-                    'style3' => __('Design 3 - Creative Box', 'elementor-post-grid'),
-                    'style4' => __('Design 4 - Metro Grid', 'elementor-post-grid'),
-                    'style5' => __('Design 5 - Hover Card', 'elementor-post-grid'),
-                    'ep-style1' => __('Design 1 - Classic Overlay', 'elementor-post-grid'),
-                     'ep-style2' => __('Design 2 - Card Gradient', 'elementor-post-grid'),
-                     'ep-style3' => __('Design 3 - Modern Hover', 'elementor-post-grid'),
-                     'ep-style4' => __('Design 4 - Creative Tilt', 'elementor-post-grid'),
-                     'ep-style5' => __('Design 5 - Minimal List', 'elementor-post-grid'),
+                    'huge-style1' => __('Design 1 - Card', 'elementor-post-grid'),
+                    'huge-style2' => __('Design 2 - Card Overlay', 'elementor-post-grid'),
+                    'huge-style3' => __('Design 3 - Creative Box', 'elementor-post-grid'),
+                    // 'style4' => __('Design 4 - Metro Grid', 'elementor-post-grid'),
+                    'huge-style4' => __('Design 5 - Hover Card', 'elementor-post-grid'),
+                    'huge-style5' => __('Design 1 - Classic Overlay', 'elementor-post-grid'),
+                     'huge-style6' => __('Design 2 - Card Gradient', 'elementor-post-grid'),
+                     'huge-style7' => __('Design 3 - Modern Hover', 'elementor-post-grid'),
+                     'huge-style8' => __('Design 4 - Creative Tilt', 'elementor-post-grid'),
+                     'huge-style9' => __('Design 5 - Minimal List', 'elementor-post-grid'),
                 ],
-                'default' => 'style1',
+                'default' => 'huge-style1',
                 'separator' => 'before',
             ]
         );
@@ -224,67 +224,64 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         );
 
         // Add this in your register_controls() function after the existing controls
-        $this->add_responsive_control(
-            'columns',
-            [
-                'label' => __('Columns', 'elementor-post-grid'),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'options' => [
-                    '1' => __('1', 'elementor-post-grid'),
-                    '2' => __('2', 'elementor-post-grid'),
-                    '3' => __('3', 'elementor-post-grid'),
-                    '4' => __('4', 'elementor-post-grid'),
-                    '5' => __('5', 'elementor-post-grid'),
-                    '6' => __('6', 'elementor-post-grid'),
-                ],
-                'desktop_default' => '3',
-                'tablet_default' => '2',
-                'mobile_default' => '1',
-                'prefix_class' => 'huge-post-grid-column-%s-', // Changed class prefix
-                'frontend_available' => true,
-            ]
-        );
-        $this->add_responsive_control(
-            'column_gap',
-            [
-                'label' => __('Column Gap', 'elementor-post-grid'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
-                ],
-                'default' => [
-                    'size' => 30,
-                    'unit' => 'px',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .huge-post-grid' => 'grid-column-gap: {{SIZE}}{{UNIT}}; column-gap: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-        
-        $this->add_responsive_control(
-            'row_gap',
-            [
-                'label' => __('Row Gap', 'elementor-post-grid'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
-                ],
-                'default' => [
-                    'size' => 30,
-                    'unit' => 'px',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .huge-post-grid' => 'grid-row-gap: {{SIZE}}{{UNIT}}; row-gap: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
+        $this->add_control(
+        'columns',
+        [
+            'label' => __('Columns', 'elementor-post-grid'),
+            'type' => \Elementor\Controls_Manager::SELECT,
+            'options' => [
+                '1' => __('1 Column', 'elementor-post-grid'),
+                '2' => __('2 Columns', 'elementor-post-grid'),
+                '3' => __('3 Columns', 'elementor-post-grid'),
+                '4' => __('4 Columns', 'elementor-post-grid'),
+                '5' => __('5 Columns', 'elementor-post-grid'),
+                '6' => __('6 Columns', 'elementor-post-grid'),
+            ],
+            'default' => '3',
+            'separator' => 'before',
+        ]
+    );
+$this->add_control(
+    'column_gap',
+    [
+        'label' => __('Column Gap', 'elementor-post-grid'),
+        'type' => \Elementor\Controls_Manager::SLIDER,
+        'range' => [
+            'px' => [
+                'min' => 0,
+                'max' => 100,
+            ],
+        ],
+        'default' => [
+            'size' => 30,
+            'unit' => 'px',
+        ],
+        'selectors' => [
+            '{{WRAPPER}} .huge-post-grid' => 'column-gap: {{SIZE}}{{UNIT}};',
+        ],
+    ]
+);
+
+$this->add_control(
+    'row_gap',
+    [
+        'label' => __('Row Gap', 'elementor-post-grid'),
+        'type' => \Elementor\Controls_Manager::SLIDER,
+        'range' => [
+            'px' => [
+                'min' => 0,
+                'max' => 100,
+            ],
+        ],
+        'default' => [
+            'size' => 30,
+            'unit' => 'px',
+        ],
+        'selectors' => [
+            '{{WRAPPER}} .huge-post-grid' => 'row-gap: {{SIZE}}{{UNIT}};',
+        ],
+    ]
+);
 
 
         $this->end_controls_section();
@@ -311,8 +308,8 @@ protected function render() {
     $query = new WP_Query($query_args);
     
     if ($query->have_posts()) {
-        echo '<div class="custom-post-grid style-' . esc_attr($settings['post_style']) . '">';
-        // echo '<div class="huge-post-grid huge-post-grid-style huge-post-grid-' . esc_attr($settings['post_style']) . '">';
+        // echo '<div class="custom-post-grid style-' . esc_attr($settings['post_style']) . '">';
+        echo '<div class="huge-post-grid ep-post-grid huge-post-grid-' . esc_attr($settings['post_style']) . ' huge-post-columns-' . esc_attr($settings['columns']) . '">';
         
         while ($query->have_posts()) {
             $query->the_post();

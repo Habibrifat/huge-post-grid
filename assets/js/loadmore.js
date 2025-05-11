@@ -200,7 +200,7 @@ jQuery(document).ready(function ($) {
       data: ajaxData,
       success: function (response) {
         if (response && response !== "0") {
-          $(".custom-post-grid").append(response);
+          $(".huge-post-grid").append(response);
           button.data("page", parseInt(button.data("page")) + 1);
 
           if (
