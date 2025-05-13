@@ -837,36 +837,7 @@ protected function render_post_style($style, $settings) {
 //     }
 //     echo '</div></div>';
 // }
-// protected function render_pagination($query, $settings) {
 
-//     if ($settings['pagination_type'] === 'load_more') {
-//         $max_pages = $query->max_num_pages;
-//         if ($max_pages > 1) {
-//             echo '<div class="load-more-wrapper">';
-//             echo '<button id="load-more-posts" class="load-more-btn" data-page="1" 
-//                       data-max-pages="' . esc_attr($max_pages) . '"
-//                       data-posts-per-page="' . esc_attr($settings['posts_per_page']) . '"
-//                       data-category="' . esc_attr($settings['selected_category']) . '"
-//                       data-post-style="' . esc_attr($settings['post_style']) . '"
-//                       data-settings="' . esc_attr(json_encode($settings)) . '">'
-//                    . __('Load More', 'elementor-post-grid') . '</button>';
-//             echo '</div>';
-//         }
-//     }
-//     elseif ($settings['pagination_type'] === 'pagination') {
-//         $big = 999999999; // need an unlikely integer
-//         echo '<div class="post-grid-pagination">';
-//         echo paginate_links([
-//             'base'      => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-//             'format'    => '?paged=%#%',
-//             'current'   => max(1, get_query_var('paged'), get_query_var('page')),
-//             'total'     => $query->max_num_pages,
-//             'prev_text' => __('« Prev', 'elementor-post-grid'),
-//             'next_text' => __('Next »', 'elementor-post-grid'),
-//         ]);
-//         echo '</div>';
-//     }
-// }
 
 // protected function render_pagination($query, $settings) {
 //     if ($settings['pagination_type'] === 'load_more') {
@@ -879,6 +850,7 @@ protected function render_post_style($style, $settings) {
 //                       data-posts-per-page="' . esc_attr($settings['posts_per_page']) . '"
 //                       data-category="' . esc_attr($settings['selected_category']) . '"
 //                       data-post-style="' . esc_attr($settings['post_style']) . '"
+                      
 //                       data-show-image="' . esc_attr($settings['show_image']) . '"
 //                       data-show-category="' . esc_attr($settings['show_category']) . '"
 //                       data-show-content="' . esc_attr($settings['show_content']) . '"
@@ -890,19 +862,37 @@ protected function render_post_style($style, $settings) {
 //                    . __('Load More', 'elementor-post-grid') . '</button>';
 //             echo '</div>';
 //         }
-//     }elseif ($settings['pagination_type'] === 'pagination') {
-//         $big = 999999999;
-//         echo '<div class="post-grid-pagination">';
-//         echo paginate_links([
-//             'base'    => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-//             'format'  => '?paged=%#%',
-//             'current' => max(1, get_query_var('paged')),
-//             'total'   => $query->max_num_pages,
-//         ]);
-//         echo '</div>';
+//     } elseif ($settings['pagination_type'] === 'pagination') {
+//         $total_pages = $query->max_num_pages;
+//         if ($total_pages > 1) {
+//             $current_page = max(1, get_query_var('paged'), get_query_var('page'));
+            
+//             // Get the base URL
+//             $base = html_entity_decode(get_pagenum_link());
+//             $base = add_query_arg('paged', '%#%', $base);
+            
+//             // Fix for home URL pagination
+//             if (is_front_page()) {
+//                 $base = home_url('page/%#%/');
+//             }
+            
+//             echo '<div class="post-grid-pagination">';
+//             echo paginate_links([
+//                 'base'      => $base,
+//                 'format'    => '?paged=%#%',
+//                 'current'   => $current_page,
+//                 'total'     => $total_pages,
+//                 'prev_text' => __('« Prev', 'elementor-post-grid'),
+//                 'next_text' => __('Next »', 'elementor-post-grid'),
+//                 'type'      => 'list',
+//                 'end_size'  => 1,
+//                 'mid_size'  => 2,
+//                 'add_args'  => false,
+//             ]);
+//             echo '</div>';
+//         }
 //     }
 // }
-
 
 protected function render_pagination($query, $settings) {
     if ($settings['pagination_type'] === 'load_more') {
@@ -915,7 +905,6 @@ protected function render_pagination($query, $settings) {
                       data-posts-per-page="' . esc_attr($settings['posts_per_page']) . '"
                       data-category="' . esc_attr($settings['selected_category']) . '"
                       data-post-style="' . esc_attr($settings['post_style']) . '"
-                      
                       data-show-image="' . esc_attr($settings['show_image']) . '"
                       data-show-category="' . esc_attr($settings['show_category']) . '"
                       data-show-content="' . esc_attr($settings['show_content']) . '"
@@ -924,7 +913,8 @@ protected function render_pagination($query, $settings) {
                       data-image-size="' . esc_attr($settings['image_size']) . '"
                       data-title-word-limit="' . esc_attr($settings['title_word_limit']) . '"
                       data-content-word-limit="' . esc_attr($settings['content_word_limit']) . '">'
-                   . __('Load More', 'elementor-post-grid') . '</button>';
+                   . __('Load More', 'elementor-post-grid') 
+                   . '<span class="spinner"></span></button>';
             echo '</div>';
         }
     } elseif ($settings['pagination_type'] === 'pagination') {
@@ -947,7 +937,7 @@ protected function render_pagination($query, $settings) {
                 'format'    => '?paged=%#%',
                 'current'   => $current_page,
                 'total'     => $total_pages,
-                'prev_text' => __('« Prev', 'elementor-post-grid'),
+                'prev_text' => __('« Previous', 'elementor-post-grid'),
                 'next_text' => __('Next »', 'elementor-post-grid'),
                 'type'      => 'list',
                 'end_size'  => 1,

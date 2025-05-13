@@ -283,6 +283,16 @@ function render_huge_style1($settings) {
         }
         echo '</div>';
     }
+    if ($settings['show_tags'] === 'yes') {
+        $tags = get_the_tags();
+        if (!empty($tags)) {
+            echo '<div class="huge-post-grid-tags">';
+            foreach ($tags as $tag) {
+                echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
+            }
+            echo '</div>';
+        }
+    }
     
     echo '</div></div>';
 }
@@ -687,7 +697,7 @@ function render_huge_style4($settings) {
 
 function render_huge_style5($settings) {
     // Classic Overlay Design
-    echo '<div class="huge-post-item huge-style1">';
+    echo '<div class="huge-post-item huge-post-style-6">';
     
     echo '<div class="huge-post-thumbnail">';
     if ($settings['show_image'] === 'yes' && has_post_thumbnail()) {
@@ -735,7 +745,7 @@ function render_huge_style5($settings) {
 
 function render_huge_style6($settings) {
     // Card Gradient Design
-    echo '<div class="huge-post-item huge-style2">';
+    echo '<div class="huge-post-item huge-post-style-7">';
     
     echo '<div class="huge-post-thumbnail">';
     if ($settings['show_image'] === 'yes' && has_post_thumbnail()) {
@@ -786,7 +796,7 @@ function render_huge_style6($settings) {
 
 function render_huge_style7($settings) {
     // Modern Hover Design
-    echo '<div class="huge-post-item huge-style3">';
+    echo '<div class="huge-post-item huge-post-style-8">';
     
     echo '<div class="huge-post-thumbnail">';
     if ($settings['show_image'] === 'yes' && has_post_thumbnail()) {
@@ -840,7 +850,7 @@ function render_huge_style7($settings) {
 
 function render_huge_style8($settings) {
     // Creative Tilt Design
-    echo '<div class="huge-post-item huge-style4">';
+    echo '<div class="huge-post-item huge-post-style-9">';
     echo '<div class="huge-post-tilt-box">';
     
     echo '<div class="huge-post-thumbnail">';
@@ -898,7 +908,7 @@ function render_huge_style8($settings) {
 
 function render_huge_style9($settings) {
     // Minimal List Design
-    echo '<div class="huge-post-item huge-style5">';
+    echo '<div class="huge-post-item huge-post-style-10">';
     
     if ($settings['show_date'] === 'yes') {
         echo '<div class="huge-post-date">';
