@@ -244,23 +244,23 @@ function ep_render_post_style($style, $settings){
 
 function render_huge_style1($settings) {
     // Card Design
-    echo '<div class="huge-post-grid-item huge-post-style-1">';
+    echo '<div class="huge-post-item huge-post-style-1">';
     
     if ($settings['show_image'] === 'yes' && has_post_thumbnail()) {
         $image_size = isset($settings['image_size']) ? $settings['image_size'] : 'large';
-        echo '<div class="huge-post-grid-thumbnail"><a href="' . get_permalink() . '">' . get_the_post_thumbnail(get_the_ID(), $image_size) . '</a></div>';
+        echo '<div class="huge-post-thumbnail"><a href="' . get_permalink() . '">' . get_the_post_thumbnail(get_the_ID(), $image_size) . '</a></div>';
     }
     
-    echo '<div class="huge-post-grid-content-wrapper">';
+    echo '<div class="huge-post-content-wrapper">';
     
     if ($settings['show_category'] === 'yes') {
         $categories = get_the_category();
         if (!empty($categories)) {
-            echo '<div class="huge-post-grid-category">' . esc_html($categories[0]->name) . '</div>';
+            echo '<div class="huge-post-category">' . esc_html($categories[0]->name) . '</div>';
         }
     }
     
-    echo '<h3 class="huge-post-grid-title"><a href="' . get_permalink() . '">' . wp_trim_words(get_the_title(), $settings['title_word_limit'], '...') . '</a></h3>';
+    echo '<h3 class="huge-post-title"><a href="' . get_permalink() . '">' . wp_trim_words(get_the_title(), $settings['title_word_limit'], '...') . '</a></h3>';
 
     if ($settings['show_content'] === 'yes') {
         $word_limit = !empty($settings['content_word_limit']) ? $settings['content_word_limit'] : 20;
@@ -274,19 +274,19 @@ function render_huge_style1($settings) {
     }
     
     if ($settings['show_author'] === 'yes' || $settings['show_date'] === 'yes') {
-        echo '<div class="huge-post-grid-footer">';
+        echo '<div class="huge-post-footer">';
         if ($settings['show_author'] === 'yes') {
-            echo '<span class="huge-post-grid-author">' . get_the_author() . '</span>';
+            echo '<span class="huge-post-author">' . get_the_author() . '</span>';
         }
         if ($settings['show_date'] === 'yes') {
-            echo '<span class="huge-post-grid-date">' . get_the_date() . '</span>';
+            echo '<span class="huge-post-date">' . get_the_date() . '</span>';
         }
         echo '</div>';
     }
     if ($settings['show_tags'] === 'yes') {
         $tags = get_the_tags();
         if (!empty($tags)) {
-            echo '<div class="huge-post-grid-tags">';
+            echo '<div class="huge-post-tags">';
             foreach ($tags as $tag) {
                 echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
             }
@@ -299,7 +299,7 @@ function render_huge_style1($settings) {
 
 function render_huge_style2($settings) {
     // Card Overlay
-    echo '<div class="huge-post-grid-item style-2 huge-post-style-2">';
+    echo '<div class="huge-post-item style-2 huge-post-style-2">';
     
     if ($settings['show_image'] === 'yes' && has_post_thumbnail()) {
         $image_size = isset($settings['image_size']) ? $settings['image_size'] : 'large';
@@ -337,7 +337,7 @@ function render_huge_style2($settings) {
 
 function render_huge_style3($settings) {
     // Creative Box
-    echo '<div class="huge-post-grid-item huge-post-style-3">';
+    echo '<div class="huge-post-item huge-post-style-3">';
     
     if ($settings['show_image'] === 'yes' && has_post_thumbnail()) {
         echo '<div class="huge-post-thumbnail">';
@@ -400,7 +400,7 @@ function render_huge_style3($settings) {
 
 function render_huge_style4($settings) {
     // Hover Card
-    echo '<div class="huge-post-grid-item huge-post-style-5">';  // Changed from style-5
+    echo '<div class="huge-post-item huge-post-style-5">';  // Changed from style-5
     
     if ($settings['show_image'] === 'yes' && has_post_thumbnail()) {
         echo '<div class="huge-post-thumbnail">';

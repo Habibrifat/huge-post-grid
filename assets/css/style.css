@@ -1,57 +1,94 @@
-.huge-post-grid-item.huge-post-style-1 {
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 8px;
-  background: #fff;
-}
-.huge-post-style-1 .huge-post-grid-thumbnail img {
+/* Common Styles */
+.huge-post-grid {
+  display: grid;
   width: 100%;
-  height: auto;
-  border-radius: 5px;
 }
-.huge-post-style-1 .huge-post-grid-content-wrapper {
-  padding: 15px 10px 0 10px;
+
+.huge-post-item {
+  position: relative;
 }
-.huge-post-grid-item.huge-post-style-1 {
-  background: #fff;
-  border-radius: 5px;
+.huge-post-thumbnail {
+  position: relative;
   overflow: hidden;
-  transition: all 0.3s ease;
 }
 
-.huge-post-style-1 .huge-post-grid-title {
+.huge-post-title {
   margin: 0 0 10px;
-  font-size: 1.2em;
+  font-size: 1.3em;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
-.huge-post-style-1 .huge-post-grid-title a {
+.huge-post-title a {
   color: inherit;
   text-decoration: none;
 }
 
-.huge-post-style-1 .huge-post-grid-thumbnail {
+.huge-post-meta {
+  font-size: 0.85em;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.huge-post-meta span {
+  margin-right: 12px;
+  display: inline-block;
+}
+
+.huge-post-meta i {
+  margin-right: 3px;
+}
+
+.huge-post-excerpt {
+  margin-bottom: 15px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Design 1 - Card */
+
+.huge-post-item.huge-post-style-1 {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #ddd;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+.huge-post-style-1 .huge-post-content-wrapper {
+  padding: 20px 20px 20px 20px;
+}
+
+.huge-post-style-1 .huge-post-title {
+  margin: 0 0 10px;
+  font-size: 1.2em;
+}
+
+.huge-post-style-1 .huge-post-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.huge-post-style-1 .huge-post-thumbnail {
   overflow: hidden;
 }
 
-.huge-post-style-1 .huge-post-grid-thumbnail img {
+.huge-post-style-1 .huge-post-thumbnail img {
   display: block;
   width: 100%;
+  max-height: 100%;
   height: 240px !important;
+  border-radius: 8px;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
-
-.huge-post-grid-item.huge-post-style-1 {
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-
-.huge-post-grid-item.huge-post-style-1 .huge-post-grid-category {
+.huge-post-item.huge-post-style-1 .huge-post-category {
   color: #4b00e7;
   font-weight: bold;
   margin-bottom: 8px;
 }
 
-.huge-post-grid-item.huge-post-style-1 .huge-post-grid-footer {
+.huge-post-item.huge-post-style-1 .huge-post-footer {
   border-top: 1px solid #eee;
   padding-top: 10px;
   margin-top: 15px;
@@ -66,23 +103,23 @@
   text-transform: capitalize;
 }
 
-.huge-post-style-1.huge-post-grid-item:hover {
+.huge-post-style-1.huge-post-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.huge-post-style-1.huge-post-grid-item:hover .huge-post-grid-thumbnail img {
+.huge-post-style-1.huge-post-item:hover .huge-post-thumbnail img {
   transform: scale(1.05);
 }
 
-.huge-post-style-1.huge-post-grid-item:hover .huge-post-grid-title a {
+.huge-post-style-1.huge-post-item:hover .huge-post-title a {
   color: #4b00e7;
 }
-.huge-post-style-1 .huge-post-grid-tags {
+.huge-post-style-1 .huge-post-tags {
   text-align: center;
   margin: 10px 0;
 }
-.huge-post-style-1 .huge-post-grid-tags a {
+.huge-post-style-1 .huge-post-tags a {
   display: inline-block;
   background: #f5f5f5;
   color: #000000;
@@ -93,61 +130,12 @@
   text-transform: capitalize;
 }
 
-.huge-post-grid {
-  display: grid;
-  grid-gap: 30px;
-}
-
-.huge-post-grid-item {
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.huge-post-thumbnail {
-  position: relative;
-  overflow: hidden;
-}
-
-.huge-post-thumbnail img {
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: transform 1.2s cubic-bezier(0.2, 0.96, 0.34, 1);
-}
-
-.huge-post-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.huge-post-title {
-  margin: 0 0 10px;
-  font-size: 1.3em;
-  line-height: 1.4;
-}
-
-.huge-post-title a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.huge-post-grid.style-2 {
+/* Design 2 - Card Overlay */
+.huge-post-grid.huge-post-grid-huge-style2 {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
-.huge-post-grid-item.huge-post-style-2 {
+.huge-post-item.huge-post-style-2 {
   min-height: 400px;
   display: flex;
   align-items: flex-end;
@@ -158,18 +146,18 @@
   color: #fff;
 }
 
-.huge-post-grid-item.huge-post-style-2 .huge-post-content {
+.huge-post-item.huge-post-style-2 .huge-post-content {
   position: relative;
   z-index: 2;
   padding: 30px;
   width: 100%;
 }
 
-.huge-post-grid-item.huge-post-style-2 .huge-post-meta-top {
+.huge-post-item.huge-post-style-2 .huge-post-meta-top {
   margin-bottom: 15px;
 }
 
-.huge-post-grid-item.huge-post-style-2 .huge-post-date {
+.huge-post-item.huge-post-style-2 .huge-post-date {
   display: inline-block;
   background: rgba(255, 255, 255, 0.2);
   padding: 5px 15px;
@@ -177,7 +165,7 @@
   backdrop-filter: blur(5px);
 }
 
-.huge-post-grid-item.huge-post-style-2 .huge-post-meta-bottom {
+.huge-post-item.huge-post-style-2 .huge-post-meta-bottom {
   display: flex;
   gap: 15px;
   margin-top: 15px;
@@ -187,19 +175,28 @@
 .huge-post-style-2 .huge-post-thumbnail img {
   display: block;
   width: 100%;
+  max-height: 100%;
   height: 200px;
   object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+.huge-post-style-2.huge-post-item:hover .huge-post-thumbnail img {
+  transform: scale(1.1);
 }
 
-.huge-post-grid.huge-post-style-3 {
+/* Design 3 - Creative Box */
+.huge-post-grid.huge-post-grid-huge-style3 {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
-
-.huge-post-grid-item.huge-post-style-3 {
+.huge-post-item.huge-post-style-3 {
   aspect-ratio: auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.huge-post-grid-item.huge-post-style-3 .huge-post-hover-content {
+.huge-post-item.huge-post-style-3 .huge-post-hover-content {
   position: absolute;
   top: 0;
   left: 0;
@@ -215,12 +212,12 @@
   transition: all 0.4s ease;
 }
 
-.huge-post-grid-item.huge-post-style-3 .huge-post-hover-inner {
+.huge-post-item.huge-post-style-3 .huge-post-hover-inner {
   transform: translateY(20px);
   transition: all 0.4s ease 0.1s;
 }
 
-.huge-post-grid-item.huge-post-style-3 .huge-post-category {
+.huge-post-item.huge-post-style-3 .huge-post-category {
   display: inline-block;
   background: #4b00e7;
   color: #fff;
@@ -231,38 +228,70 @@
   text-transform: uppercase;
 }
 
-.huge-post-grid-item.huge-post-style-3 .huge-post-title {
+.huge-post-item.huge-post-style-3 .huge-post-title {
   color: #fff;
   font-size: 1.5em;
   margin-bottom: 10px;
 }
 
-.huge-post-grid-item.huge-post-style-3 .huge-post-date {
+.huge-post-item.huge-post-style-3 .huge-post-date {
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.9em;
 }
 .huge-post-style-3 .huge-post-thumbnail img {
   display: block;
   width: 100%;
+  max-height: 100%;
   height: 400px;
   object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.2, 0.96, 0.34, 1);
+}
+.huge-post-style-3 .huge-post-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.huge-post-style-3.huge-post-item:hover .huge-post-thumbnail img {
+  transform: scale(1.1);
+}
+.huge-post-item.huge-post-style-3:hover .huge-post-overlay {
+  opacity: 1;
 }
 
+.huge-post-item.huge-post-style-3:hover .huge-post-hover-content,
+.huge-post-item.huge-post-style-3:hover .huge-post-hover-inner {
+  opacity: 1;
+  transform: translateY(0);
+}
+.huge-post-item.huge-post-style-3:hover .huge-post-title a {
+  color: #ddd;
+}
+
+/* Design 4 - Metro Grid */
 .huge-post-grid.huge-post-style-4 {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-rows: 250px;
   grid-gap: 5px;
 }
 
-.huge-post-grid-item.huge-post-style-4 {
+.huge-post-item.huge-post-style-4 {
   border-radius: 0;
 }
 
-.huge-post-grid-item.huge-post-style-4:nth-child(3n + 1) {
+.huge-post-item.huge-post-style-4:nth-child(3n + 1) {
   grid-row: span 2;
 }
 
-.huge-post-grid-item.huge-post-style-4 .huge-post-content {
+.huge-post-item.huge-post-style-4 .huge-post-content {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -273,7 +302,7 @@
   transition: transform 0.3s ease;
 }
 
-.huge-post-grid-item.huge-post-style-4 .huge-post-category {
+.huge-post-item.huge-post-style-4 .huge-post-category {
   display: inline-block;
   background: #0073aa;
   color: #fff;
@@ -281,22 +310,30 @@
   margin-bottom: 10px;
   font-size: 0.8em;
 }
+.huge-post-style-4.huge-post-item:hover .huge-post-thumbnail img {
+  transform: scale(1.1);
+}
+.huge-post-item.huge-post-style-4:hover .huge-post-content {
+  transform: translateY(0);
+  color: black;
+}
 
+/* Design 5 - Hover Card */
 .huge-post-grid.huge-post-style-5 {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
-.huge-post-grid-item.huge-post-style-5 {
+.huge-post-item.huge-post-style-5 {
   background: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.huge-post-grid-item.huge-post-style-5 .huge-post-content {
+.huge-post-item.huge-post-style-5 .huge-post-content {
   padding: 25px;
   position: relative;
 }
 
-.huge-post-grid-item.huge-post-style-5 .huge-post-date {
+.huge-post-item.huge-post-style-5 .huge-post-date {
   display: inline-block;
   background: #f5f5f5;
   color: #0073aa;
@@ -307,13 +344,13 @@
   font-weight: 600;
 }
 
-.huge-post-grid-item.huge-post-style-5 .huge-post-excerpt {
+.huge-post-item.huge-post-style-5 .huge-post-excerpt {
   color: #666;
   margin-bottom: 20px;
   line-height: 1.6;
 }
 
-.huge-post-grid-item.huge-post-style-5 .huge-post-readmore {
+.huge-post-item.huge-post-style-5 .huge-post-readmore {
   position: absolute;
   right: 25px;
   bottom: 25px;
@@ -330,43 +367,26 @@
 .huge-post-style-5 .huge-post-thumbnail img {
   display: block;
   width: 100%;
+  max-height: 100%;
   height: 280px !important;
-  height: auto;
   object-fit: cover;
   transition: transform 1.2s cubic-bezier(0.2, 0.96, 0.34, 1);
 }
+.huge-post-style-5.huge-post-item:hover .huge-post-thumbnail img {
+  transform: scale(1.1);
+}
 
-.huge-post-grid-item:hover {
+.huge-post-item.huge-post-style-5:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
-.huge-post-grid-item:hover .huge-post-thumbnail img {
-  transform: scale(1.1);
-}
-
-.huge-post-grid-item:hover .huge-post-overlay {
-  opacity: 1;
-}
-
-.huge-post-grid-item.huge-post-style-3:hover .huge-post-hover-content,
-.huge-post-grid-item.huge-post-style-3:hover .huge-post-hover-inner {
-  opacity: 1;
-  transform: translateY(0);
-}
-.huge-post-grid-item.huge-post-style-3:hover .huge-post-title a {
-  color: #ddd;
-}
-
-.huge-post-grid-item.huge-post-style-4:hover .huge-post-content {
-  transform: translateY(0);
-  color: black;
-}
-
-.huge-post-grid-item.huge-post-style-5:hover .huge-post-readmore {
+.huge-post-item.huge-post-style-5:hover .huge-post-readmore {
   background: #005177;
   transform: rotate(45deg);
 }
+
+/* ******************************************************************** upadte **********************************/
 
 /* .huge-post-grid-item.huge-post-style-1 {
   border: 1px solid #ddd;
@@ -1203,11 +1223,11 @@
 } */
 
 /* custom grid */
-.huge-post-grid {
+/* .huge-post-grid {
   display: grid;
   width: 100%;
   gap: 30px;
-}
+} */
 
 /* Column classes */
 .huge-post-grid.huge-post-columns-1 {
@@ -1251,56 +1271,6 @@
   .huge-post-grid {
     grid-template-columns: 1fr !important;
   }
-}
-
-.huge-post-item {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.huge-post-thumbnail {
-  position: relative;
-  overflow: hidden;
-}
-
-.huge-post-thumbnail img {
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: all 0.4s ease;
-}
-
-.huge-post-title {
-  margin: 0 0 10px;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.huge-post-title a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.huge-post-meta {
-  font-size: 0.85em;
-  color: #777;
-  margin-bottom: 10px;
-}
-
-.huge-post-meta span {
-  margin-right: 12px;
-  display: inline-block;
-}
-
-.huge-post-meta i {
-  margin-right: 3px;
-}
-
-.huge-post-excerpt {
-  margin-bottom: 15px;
-  color: #666;
-  line-height: 1.5;
 }
 
 /* Style 1 - Classic Overlay */
@@ -1386,11 +1356,20 @@
   border-color: #fff;
 }
 .huge-post-style-6 .huge-post-thumbnail img {
+  display: block;
+  width: 100%;
+  max-height: 100%;
   height: 400px;
   object-fit: cover;
+  transition: all 0.4s ease;
 }
+
 .huge-post-style-6 .huge-post-excerpt {
   color: #ebebeb;
+}
+.huge-post-style-6:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Style 2 - Card Gradient */
@@ -1452,8 +1431,12 @@
 }
 
 .huge-post-style-7 .huge-post-thumbnail img {
+  display: block;
+  width: 100%;
+  max-height: 100%;
   height: 300px;
   object-fit: cover;
+  transition: all 0.4s ease;
 }
 
 /* Style 3 - Modern Hover */
@@ -1543,9 +1526,14 @@
   transform: translateY(0);
   opacity: 1;
 }
+
 .huge-post-style-8 .huge-post-thumbnail img {
+  display: block;
+  width: 100%;
+  max-height: 100%;
   height: 300px;
   object-fit: cover;
+  transition: all 0.4s ease;
 }
 
 /* Style 4 - Creative Tilt */
@@ -1611,8 +1599,12 @@
   width: 100%;
 }
 .huge-post-style-9 .huge-post-thumbnail img {
+  display: block;
+  width: 100%;
+  max-height: 100%;
   height: 260px;
   object-fit: cover;
+  transition: all 0.4s ease;
 }
 
 /* Style 5 - Minimal List */
@@ -1654,9 +1646,9 @@
 }
 
 /* Grid Layouts */
-.huge-post-grid {
+/* .huge-post-grid {
   display: grid;
-}
+} */
 
 .custom-post-grid.huge-post-style-6 {
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -1839,11 +1831,11 @@
 }
 
 /* custom grid */
-.huge-post-grid {
+/* .huge-post-grid {
   display: grid;
   width: 100%;
   gap: 30px;
-}
+} */
 
 /* Column classes */
 .huge-post-grid.huge-post-columns-1 {
@@ -1887,4 +1879,13 @@
   .huge-post-grid {
     grid-template-columns: 1fr !important;
   }
+}
+
+/* animation */
+.huge-post-item.huge-post-style-2,
+.huge-post-item.huge-post-style-3,
+.huge-post-item.huge-post-style-5,
+.huge-post-item.huge-post-style-6,
+.huge-post-item.huge-post-style-7 {
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
