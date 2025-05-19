@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-function ep_render_post_style($style, $settings){
+function  huge_render_post_style($style, $settings){
     switch ($style) {
         case 'huge-style1':
            render_huge_style1($settings);
@@ -12,9 +12,6 @@ function ep_render_post_style($style, $settings){
         case 'huge-style3':
             render_huge_style3($settings);
             break;
-        // case 'style4':
-        //    render_huge_style4($settings);
-        //     break;
         case 'huge-style4':
             render_huge_style4($settings);
             break;     
@@ -33,8 +30,10 @@ function ep_render_post_style($style, $settings){
         case 'huge-style9':
             render_huge_style9($settings);
             break;
+        case 'huge-style10':
+            render_huge_style10($settings);
+            break;    
         default:
-            // render_style1($settings);
             render_huge_style1($settings);
     }
 }
@@ -60,16 +59,28 @@ function render_huge_style1($settings) {
     
     echo '<h3 class="huge-post-title"><a href="' . get_permalink() . '">' . wp_trim_words(get_the_title(), $settings['title_word_limit'], '...') . '</a></h3>';
 
+
     if ($settings['show_content'] === 'yes') {
         $word_limit = !empty($settings['content_word_limit']) ? $settings['content_word_limit'] : 20;
-        $excerpt = get_the_excerpt();
         
-        if (empty($excerpt)) {
-            $excerpt = wp_trim_words(get_the_content(), $word_limit, '...');
+        if ($settings['content_type'] === 'excerpt') {
+            $content = get_the_excerpt();
+            if (empty($content)) {
+                $content = get_the_content();
+            }
+        } else {
+            $content = get_the_content();
         }
         
-        echo '<div class="huge-post-excerpt">'. esc_html(wp_trim_words($excerpt, $word_limit, '...')) . '</div>';
+        // Apply word limit to both excerpt and content
+        $content = wp_trim_words($content, $word_limit, '...');
+        
+        // Apply content filters (for shortcodes, formatting etc.)
+        $content = apply_filters('the_content', $content);
+        
+        echo '<div class="huge-post-excerpt">'. wp_kses_post($content) . '</div>';
     }
+
     
     if ($settings['show_author'] === 'yes' || $settings['show_date'] === 'yes') {
         echo '<div class="huge-post-footer">';
@@ -166,37 +177,69 @@ function render_huge_style3($settings) {
     echo '</div>';
 }
 
-// function render_huge_style5($settings) {
-//     // Metro Grid
-//     echo '<div class="huge-post-grid-item huge-post-style-4">';  // Changed from style-4
-    
-//     if ($settings['show_image'] === 'yes' && has_post_thumbnail()) {
-//         echo '<div class="huge-post-thumbnail">';
-//         echo get_the_post_thumbnail(get_the_ID(), isset($settings['image_size']) ? $settings['image_size'] : 'large');
-//         echo '<div class="huge-post-overlay"></div>';
-//         echo '</div>';
-//     }
-    
-//     echo '<div class="huge-post-content">';
-    
-//     if ($settings['show_category'] === 'yes') {
-//         $categories = get_the_category();
-//         if (!empty($categories)) {
-//             echo '<span class="huge-post-category">' . esc_html($categories[0]->name) . '</span>';
-//         }
-//     }
-    
-//     echo '<h3 class="huge-post-title"><a href="' . get_permalink() . '">' . wp_trim_words(get_the_title(), $settings['title_word_limit'], '...') . '</a></h3>';
-    
-//     if ($settings['show_date'] === 'yes') {
-//         echo '<span class="huge-post-date">' . get_the_date('F j, Y') . '</span>';
-//     }
-    
-//     echo '</div>';
-//     echo '</div>';
-// }
-
 function render_huge_style4($settings) {
+    echo '<div class="huge-post-item huge-post-style-4">';
+    
+    // Image container with overlay
+    if ($settings['show_image'] === 'yes' && has_post_thumbnail()) {
+        $image_size = isset($settings['image_size']) ? $settings['image_size'] : 'large';
+        echo '<div class="huge-post-image-side">';
+        echo '<div class="huge-post-overlay"></div>';
+        echo '<a href="' . get_permalink() . '">' . get_the_post_thumbnail(get_the_ID(), $image_size) . '</a>';
+        
+        // Icon badge
+        echo '<div class="huge-post-icon-badge">';
+        echo '<i class="fas fa-bookmark"></i>';
+        echo '</div>';
+        echo '</div>';
+    }
+    
+    // Content side
+    echo '<div class="huge-post-content-side">';
+    
+    if ($settings['show_category'] === 'yes') {
+        $categories = get_the_category();
+        if (!empty($categories)) {
+            echo '<div class="huge-post-category">' . esc_html($categories[0]->name) . '</div>';
+        }
+    }
+    
+    echo '<h3 class="huge-post-title"><a href="' . get_permalink() . '">' . wp_trim_words(get_the_title(), $settings['title_word_limit'], '...') . '</a></h3>';
+
+    if ($settings['show_content'] === 'yes') {
+        $word_limit = !empty($settings['content_word_limit']) ? $settings['content_word_limit'] : 20;
+        
+        if ($settings['content_type'] === 'excerpt') {
+            $content = get_the_excerpt();
+            if (empty($content)) {
+                $content = get_the_content();
+            }
+        } else {
+            $content = get_the_content();
+        }
+        
+        // Apply word limit to both excerpt and content
+        $content = wp_trim_words($content, $word_limit, '...');
+        
+        // Apply content filters (for shortcodes, formatting etc.)
+        $content = apply_filters('the_content', $content);
+        
+        echo '<div class="huge-post-excerpt">'. wp_kses_post($content) . '</div>';
+    }
+    
+    echo '<div class="huge-post-meta-footer">';
+    if ($settings['show_author'] === 'yes') {
+        echo '<span class="huge-post-author"><i class="fas fa-user"></i> ' . get_the_author() . '</span>';
+    }
+    if ($settings['show_date'] === 'yes') {
+        echo '<span class="huge-post-date"><i class="far fa-calendar-alt"></i> ' . get_the_date() . '</span>';
+    }
+    echo '</div>';
+    
+    echo '</div></div>';
+}
+
+function render_huge_style5($settings) {
     // Hover Card
     echo '<div class="huge-post-item huge-post-style-5">';  // Changed from style-5
     
@@ -216,13 +259,23 @@ function render_huge_style4($settings) {
     
     if ($settings['show_content'] === 'yes') {
         $word_limit = !empty($settings['content_word_limit']) ? $settings['content_word_limit'] : 20;
-        $excerpt = get_the_excerpt();
         
-        if (empty($excerpt)) {
-            $excerpt = wp_trim_words(get_the_content(), $word_limit, '...');
+        if ($settings['content_type'] === 'excerpt') {
+            $content = get_the_excerpt();
+            if (empty($content)) {
+                $content = get_the_content();
+            }
+        } else {
+            $content = get_the_content();
         }
         
-        echo '<div class="huge-post-excerpt">'. esc_html(wp_trim_words($excerpt, $word_limit, '...')) . '</div>';
+        // Apply word limit to both excerpt and content
+        $content = wp_trim_words($content, $word_limit, '...');
+        
+        // Apply content filters (for shortcodes, formatting etc.)
+        $content = apply_filters('the_content', $content);
+        
+        echo '<div class="huge-post-excerpt">'. wp_kses_post($content) . '</div>';
     }
     
     echo '<a href="' . get_permalink() . '" class="huge-post-readmore"><i class="fas fa-arrow-right"></i></a>';
@@ -231,55 +284,59 @@ function render_huge_style4($settings) {
     echo '</div>';
 }
 
-function render_huge_style5($settings) {
-    // Classic Overlay Design
+function render_huge_style6($settings) {
+    // Overlay Content with Gradient Design
     echo '<div class="huge-post-item huge-post-style-6">';
     
-    echo '<div class="huge-post-thumbnail">';
+    // Image container
     if ($settings['show_image'] === 'yes' && has_post_thumbnail()) {
-        echo '<a href="' . get_permalink() . '">' . get_the_post_thumbnail(get_the_ID(), isset($settings['image_size']) ? $settings['image_size'] : 'large') . '</a>';
+        $image_size = isset($settings['image_size']) ? $settings['image_size'] : 'large';
+        echo '<div class="huge-post-thumbnail">';
+        echo get_the_post_thumbnail(get_the_ID(), $image_size);
+        echo '<div class="huge-post-overlay"></div>';
+        echo '</div>';
     }
-    echo '<div class="huge-post-overlay"></div>';
     
+    // Content container
+    echo '<div class="huge-post-content-wrapper">';
+    
+    // Top meta (category and date)
+    echo '<div class="huge-post-meta-top">';
     if ($settings['show_category'] === 'yes') {
         $categories = get_the_category();
         if (!empty($categories)) {
-            echo '<div class="huge-post-category"><a href="' . esc_url(get_category_link($categories[0]->term_id)) . '">' . esc_html($categories[0]->name) . '</a></div>';
+            echo '<span class="huge-post-category">' . esc_html($categories[0]->name) . '</span>';
         }
-    }
-    echo '</div>';
-    
-    echo '<div class="huge-post-content">';
-    echo '<h3 class="huge-post-title"><a href="' . get_permalink() . '">' . wp_trim_words(get_the_title(), $settings['title_word_limit'], '...') . '</a></h3>';
-    
-    echo '<div class="huge-post-meta">';
-    if ($settings['show_author'] === 'yes') {
-        echo '<span class="huge-post-author"><i class="fas fa-user"></i> ' . get_the_author() . '</span>';
     }
     if ($settings['show_date'] === 'yes') {
-        echo '<span class="huge-post-date"><i class="far fa-calendar-alt"></i> ' . get_the_date() . '</span>';
+        echo '<span class="huge-post-date">' . get_the_date('M d, Y') . '</span>';
     }
     echo '</div>';
     
-    if ($settings['show_content'] === 'yes') {
-        $word_limit = !empty($settings['content_word_limit']) ? $settings['content_word_limit'] : 20;
-        $excerpt = get_the_excerpt();
-        
-        if (empty($excerpt)) {
-            $excerpt = wp_trim_words(get_the_content(), $word_limit, '...');
-        }
-        
-        echo '<div class="huge-post-excerpt">'. esc_html(wp_trim_words($excerpt, $word_limit, '...')) . '</div>';
-    }
+    // Title
+    echo '<h3 class="huge-post-title"><a href="' . get_permalink() . '">' . wp_trim_words(get_the_title(), $settings['title_word_limit'], '...') . '</a></h3>';
     
-    if ($settings['show_readmore'] === 'yes') {
-        echo '<a href="' . get_permalink() . '" class="huge-read-more">' . __('Read More', 'elementor-post-grid') . '</a>';
+    // Bottom meta (author and read time)
+    echo '<div class="huge-post-meta-bottom">';
+    if ($settings['show_tags'] === 'yes') {
+        $tags = get_the_tags();
+        if (!empty($tags)) {
+            echo '<div class="huge-post-tags">';
+            foreach ($tags as $tag) {
+                echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
+            }
+            echo '</div>';
+        }
     }
+    if ($settings['show_readmore'] === 'yes') {
+        echo '<a href="' . get_permalink() . '" class="huge-post-readmore">Read More</a>';
+    }
+    echo '</div>';
     
     echo '</div></div>';
 }
 
-function render_huge_style6($settings) {
+function render_huge_style7($settings) {
     // Card Gradient Design
     echo '<div class="huge-post-item huge-post-style-7">';
     
@@ -319,18 +376,28 @@ function render_huge_style6($settings) {
     
     if ($settings['show_content'] === 'yes') {
         $word_limit = !empty($settings['content_word_limit']) ? $settings['content_word_limit'] : 20;
-        $excerpt = get_the_excerpt();
         
-        if (empty($excerpt)) {
-            $excerpt = wp_trim_words(get_the_content(), $word_limit, '...');
+        if ($settings['content_type'] === 'excerpt') {
+            $content = get_the_excerpt();
+            if (empty($content)) {
+                $content = get_the_content();
+            }
+        } else {
+            $content = get_the_content();
         }
         
-        echo '<div class="huge-post-excerpt">'. esc_html(wp_trim_words($excerpt, $word_limit, '...')) . '</div>';
+        // Apply word limit to both excerpt and content
+        $content = wp_trim_words($content, $word_limit, '...');
+        
+        // Apply content filters (for shortcodes, formatting etc.)
+        $content = apply_filters('the_content', $content);
+        
+        echo '<div class="huge-post-excerpt">'. wp_kses_post($content) . '</div>';
     }
     echo '</div></div></div>';
 }
 
-function render_huge_style7($settings) {
+function render_huge_style8($settings) {
     // Modern Hover Design
     echo '<div class="huge-post-item huge-post-style-8">';
     
@@ -359,15 +426,26 @@ function render_huge_style7($settings) {
         }
     }
 
+
     if ($settings['show_content'] === 'yes') {
         $word_limit = !empty($settings['content_word_limit']) ? $settings['content_word_limit'] : 20;
-        $excerpt = get_the_excerpt();
         
-        if (empty($excerpt)) {
-            $excerpt = wp_trim_words(get_the_content(), $word_limit, '...');
+        if ($settings['content_type'] === 'excerpt') {
+            $content = get_the_excerpt();
+            if (empty($content)) {
+                $content = get_the_content();
+            }
+        } else {
+            $content = get_the_content();
         }
         
-        echo '<div class="huge-post-excerpt">'. esc_html(wp_trim_words($excerpt, $word_limit, '...')) . '</div>';
+        // Apply word limit to both excerpt and content
+        $content = wp_trim_words($content, $word_limit, '...');
+        
+        // Apply content filters (for shortcodes, formatting etc.)
+        $content = apply_filters('the_content', $content);
+        
+        echo '<div class="huge-post-excerpt">'. wp_kses_post($content) . '</div>';
     }
 
     if ($settings['show_tags'] === 'yes') {
@@ -384,7 +462,7 @@ function render_huge_style7($settings) {
     echo '</div>';
 }
 
-function render_huge_style8($settings) {
+function render_huge_style9($settings) {
     // Creative Tilt Design
     echo '<div class="huge-post-item huge-post-style-9">';
     echo '<div class="huge-post-tilt-box">';
@@ -416,13 +494,23 @@ function render_huge_style8($settings) {
     
     if ($settings['show_content'] === 'yes') {
         $word_limit = !empty($settings['content_word_limit']) ? $settings['content_word_limit'] : 20;
-        $excerpt = get_the_excerpt();
         
-        if (empty($excerpt)) {
-            $excerpt = wp_trim_words(get_the_content(), $word_limit, '...');
+        if ($settings['content_type'] === 'excerpt') {
+            $content = get_the_excerpt();
+            if (empty($content)) {
+                $content = get_the_content();
+            }
+        } else {
+            $content = get_the_content();
         }
         
-        echo '<div class="huge-post-excerpt">'. esc_html(wp_trim_words($excerpt, $word_limit, '...')) . '</div>';
+        // Apply word limit to both excerpt and content
+        $content = wp_trim_words($content, $word_limit, '...');
+        
+        // Apply content filters (for shortcodes, formatting etc.)
+        $content = apply_filters('the_content', $content);
+        
+        echo '<div class="huge-post-excerpt">'. wp_kses_post($content) . '</div>';
     }
 
     if ($settings['show_tags'] === 'yes') {
@@ -437,12 +525,12 @@ function render_huge_style8($settings) {
     }
     
     if ($settings['show_readmore'] === 'yes') {
-        echo '<a href="' . get_permalink() . '" class="huge-read-more">' . __('Continue Reading', 'elementor-post-grid') . '</a>';
+        echo '<a href="' . get_permalink() . '" class="huge-read-more">' . __('Continue Reading', 'huge-post-grid') . '</a>';
     }
     echo '</div></div></div>';
 }
 
-function render_huge_style9($settings) {
+function render_huge_style10($settings) {
     // Minimal List Design
     echo '<div class="huge-post-item huge-post-style-10">';
     
@@ -458,22 +546,32 @@ function render_huge_style9($settings) {
     
     echo '<div class="huge-post-meta">';
     if ($settings['show_author'] === 'yes') {
-        echo '<span class="huge-post-author">' . __('By', 'elementor-post-grid') . ' ' . get_the_author() . '</span>';
+        echo '<span class="huge-post-author">' . __('By', 'huge-post-grid') . ' ' . get_the_author() . '</span>';
     }
     if ($settings['show_comments'] === 'yes') {
-        echo '<span class="huge-post-comments">' . get_comments_number() . ' ' . __('Comments', 'elementor-post-grid') . '</span>';
+        echo '<span class="huge-post-comments">' . get_comments_number() . ' ' . __('Comments', 'huge-post-grid') . '</span>';
     }
     echo '</div>';
     
     if ($settings['show_content'] === 'yes') {
         $word_limit = !empty($settings['content_word_limit']) ? $settings['content_word_limit'] : 20;
-        $excerpt = get_the_excerpt();
         
-        if (empty($excerpt)) {
-            $excerpt = wp_trim_words(get_the_content(), $word_limit, '...');
+        if ($settings['content_type'] === 'excerpt') {
+            $content = get_the_excerpt();
+            if (empty($content)) {
+                $content = get_the_content();
+            }
+        } else {
+            $content = get_the_content();
         }
         
-        echo '<div class="huge-post-excerpt">'. esc_html(wp_trim_words($excerpt, $word_limit, '...')) . '</div>';
+        // Apply word limit to both excerpt and content
+        $content = wp_trim_words($content, $word_limit, '...');
+        
+        // Apply content filters (for shortcodes, formatting etc.)
+        $content = apply_filters('the_content', $content);
+        
+        echo '<div class="huge-post-excerpt">'. wp_kses_post($content) . '</div>';
     }
     echo '</div></div>';
 }

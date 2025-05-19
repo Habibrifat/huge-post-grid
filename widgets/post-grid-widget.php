@@ -1,9 +1,6 @@
 <?php
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
-// In your widget class file
-// require_once 'post-grid-renderers.php';
-
 // Include the renderers file (same directory)
 require_once plugin_dir_path(__FILE__) . 'post-grid-renderers.php';
 
@@ -29,7 +26,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Settings', 'elementor-post-grid'),
+                'label' => __('Settings', 'huge-post-grid'),
                 'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -38,19 +35,19 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'post_style',
             [
-                'label' => __('Post Design Style', 'elementor-post-grid'),
+                'label' => __('Post Design Style', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    'huge-style1' => __('Design 1 - Card', 'elementor-post-grid'),
-                    'huge-style2' => __('Design 2 - Card Overlay', 'elementor-post-grid'),
-                    'huge-style3' => __('Design 3 - Creative Box', 'elementor-post-grid'),
-                    // 'style4' => __('Design 4 - Metro Grid', 'elementor-post-grid'),
-                    'huge-style4' => __('Design 5 - Hover Card', 'elementor-post-grid'),
-                    'huge-style5' => __('Design 6 - Classic Overlay', 'elementor-post-grid'),
-                     'huge-style6' => __('Design 7 - Card Gradient', 'elementor-post-grid'),
-                     'huge-style7' => __('Design 8 - Modern Hover', 'elementor-post-grid'),
-                     'huge-style8' => __('Design 9 - Creative Tilt', 'elementor-post-grid'),
-                     'huge-style9' => __('Design 10 - Minimal List', 'elementor-post-grid'),
+                    'huge-style1' => __('Design 1 - Classic Card', 'huge-post-grid'),
+                    'huge-style2' => __('Design 2 - Boxed Layout', 'huge-post-grid'),
+                    'huge-style3' => __('Design 3 - Overlay Card', 'huge-post-grid'),
+                    'huge-style4' => __('Design 4 - Split Card', 'huge-post-grid'),
+                    'huge-style5' => __('Design 5 - Modern Hover', 'huge-post-grid'),
+                    'huge-style6' => __('Design 6 - Classic Overlay', 'huge-post-grid'),
+                    'huge-style7' => __('Design 7 - Sleek Hover', 'huge-post-grid'),
+                    'huge-style8' => __('Design 8 - Elegant Overlay', 'huge-post-grid'),
+                    'huge-style9' => __('Design 9 - Creative Tilt', 'huge-post-grid'),
+                    'huge-style10' => __('Design 10 - Minimal List', 'huge-post-grid'),
                 ],
                 'default' => 'huge-style1',
                 'separator' => 'before',
@@ -60,7 +57,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Number of Posts', 'elementor-post-grid'),
+                'label' => __('Number of Posts', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 20,
@@ -71,7 +68,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
 
     // Get all categories dynamically
     $categories = get_categories();
-    $category_options = ['' => __('All Categories', 'elementor-post-grid')];
+    $category_options = ['' => __('All Categories', 'huge-post-grid')];
 
     foreach ($categories as $category) {
         $category_options[$category->slug] = $category->name;
@@ -81,7 +78,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'selected_category',
         [
-            'label' => __('Filter by Category', 'elementor-post-grid'),
+            'label' => __('Filter by Category', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::SELECT,
             'options' => $category_options,
             'default' => '',
@@ -92,10 +89,10 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_image',
             [
-                'label' => __('Show Image', 'elementor-post-grid'),
+                'label' => __('Show Image', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __('Show', 'elementor-post-grid'),
-                'label_off' => __('Hide', 'elementor-post-grid'),
+                'label_on' => __('Show', 'huge-post-grid'),
+                'label_off' => __('Hide', 'huge-post-grid'),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -104,17 +101,17 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'image_size',
             [
-                'label' => __('Image Size', 'elementor-post-grid'),
+                'label' => __('Image Size', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'medium',
                 'options' => [
-                    'thumbnail'      => __('Thumbnail - 150x150', 'elementor-post-grid'),
-                    'medium'         => __('Medium - 300x300', 'elementor-post-grid'),
-                    'medium_large'   => __('Medium Large - 768x0', 'elementor-post-grid'),
-                    'large'          => __('Large - 1024x1024', 'elementor-post-grid'),
-                    '1536x1536'      => __('1536x1536', 'elementor-post-grid'),
-                    '2048x2048'      => __('2048x2048', 'elementor-post-grid'),
-                    'full'           => __('Full', 'elementor-post-grid'),
+                    'thumbnail'      => __('Thumbnail - 150x150', 'huge-post-grid'),
+                    'medium'         => __('Medium - 300x300', 'huge-post-grid'),
+                    'medium_large'   => __('Medium Large - 768x0', 'huge-post-grid'),
+                    'large'          => __('Large - 1024x1024', 'huge-post-grid'),
+                    '1536x1536'      => __('1536x1536', 'huge-post-grid'),
+                    '2048x2048'      => __('2048x2048', 'huge-post-grid'),
+                    'full'           => __('Full', 'huge-post-grid'),
                 ],
                 'condition' => [
                     'show_image' => 'yes',
@@ -125,52 +122,70 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'title_word_limit',
             [
-                'label' => __('Title Word Limit', 'elementor-post-grid'),
+                'label' => __('Title Word Limit', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 20,
                 'default' => 10,
-                'description' => __('Limit the number of words in the post title.', 'elementor-post-grid'),
+                'description' => __('Limit the number of words in the post title.', 'huge-post-grid'),
             ]
         );
 
         $this->add_control(
             'show_content',
             [
-                'label' => __('Show Content', 'elementor-post-grid'),
+                'label' => __('Show Content', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
             ]
         );
-        
+
+        $this->add_control(
+            'content_type',
+            [
+                'label' => __('Content Type', 'huge-post-grid'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    'excerpt' => __('Excerpt', 'huge-post-grid'),
+                    'content' => __('Full Content', 'huge-post-grid'),
+                ],
+                'default' => 'excerpt',
+                'condition' => [
+                    'show_content' => 'yes'
+                ],
+            ]
+        );
+
         $this->add_control(
             'content_word_limit',
             [
-                'label' => __('Content Word Limit', 'elementor-post-grid'),
+                'label' => __('Content Word Limit', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 100,
                 'default' => 20,
                 'condition' => [
-                    'show_content' => 'yes'
+                    'show_content' => 'yes',
                 ],
-                'description' => __('Limit the number of words in the post excerpt/content.', 'elementor-post-grid'),
+                'description' => __('Limit the number of words in the post excerpt/content.', 'huge-post-grid'),
             ]
         );
 
         $this->add_control(
             'show_category',
             [
-                'label' => __('Show Category', 'elementor-post-grid'),
+                'label' => __('Show Category', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
+                'separator' => 'before',
+                
             ]
         );
 
         $this->add_control(
             'show_tags',
             [
-                'label' => __('Show Tags', 'elementor-post-grid'),
+                'label' => __('Show Tags', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
             ]
@@ -179,7 +194,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_author',
             [
-                'label' => __('Show Author', 'elementor-post-grid'),
+                'label' => __('Show Author', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
             ]
@@ -188,7 +203,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_date',
             [
-                'label' => __('Show Date', 'elementor-post-grid'),
+                'label' => __('Show Date', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
             ]
@@ -196,7 +211,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_readmore',
             [
-                'label' => __('Read More', 'elementor-post-grid'),
+                'label' => __('Read More', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
             ]
@@ -204,7 +219,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_comments',
             [
-                'label' => __('Show Comments', 'elementor-post-grid'),
+                'label' => __('Show Comments', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'default' => 'yes',
             ]
@@ -212,23 +227,23 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         $this->add_control(
             'show_pagination',
             [
-                'label' => __('Show Pagination', 'elementor-post-grid'),
+                'label' => __('Show Pagination', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => __('Yes', 'elementor-post-grid'),
-                'label_off' => __('No', 'elementor-post-grid'),
+                'label_on' => __('Yes', 'huge-post-grid'),
+                'label_off' => __('No', 'huge-post-grid'),
                 'return_value' => 'yes',
-                'default' => 'yes',
+                'default' => 'no',
             ]
         );
 
         $this->add_control(
             'pagination_type',
             [
-                'label' => __('Pagination Type', 'elementor-post-grid'),
+                'label' => __('Pagination Type', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    'pagination' => __('Numbered Pagination', 'elementor-post-grid'),
-                    'load_more' => __('Load More Button', 'elementor-post-grid'),
+                    'pagination' => __('Numbered Pagination', 'huge-post-grid'),
+                    'load_more' => __('Load More Button', 'huge-post-grid'),
                 ],
                 'default' => 'pagination',
                 'condition' => [
@@ -237,79 +252,68 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        // $this->add_control(
-        //     'pagination_type',
-        //     [
-        //         'label' => __('Pagination Type', 'elementor-post-grid'),
-        //         'type' => \Elementor\Controls_Manager::SELECT,
-        //         'options' => [
-        //             'none' => __('No Pagination', 'elementor-post-grid'),
-        //             'pagination' => __('Numbered Pagination', 'elementor-post-grid'),
-        //             'load_more' => __('Load More Button', 'elementor-post-grid'),
-        //         ],
-        //         'default' => 'pagination',
-        //     ]
-        // );
-
-        // Add this in your register_controls() function after the existing controls
-        $this->add_control(
-        'columns',
-        [
-            'label' => __('Columns', 'elementor-post-grid'),
-            'type' => \Elementor\Controls_Manager::SELECT,
-            'options' => [
-                '1' => __('1 Column', 'elementor-post-grid'),
-                '2' => __('2 Columns', 'elementor-post-grid'),
-                '3' => __('3 Columns', 'elementor-post-grid'),
-                '4' => __('4 Columns', 'elementor-post-grid'),
-                '5' => __('5 Columns', 'elementor-post-grid'),
-                '6' => __('6 Columns', 'elementor-post-grid'),
-            ],
-            'default' => '3',
-            'separator' => 'before',
-        ]
+        $this->add_responsive_control(
+            'columns',
+            [
+                'label'       => __('Columns', 'huge-post-grid'),
+                'type'        => \Elementor\Controls_Manager::SELECT,
+                'description' => __('Set the number of columns for different screen sizes.', 'huge-post-grid'),
+                'options'     => [
+                    '1' => __('1 Column', 'huge-post-grid'),
+                    '2' => __('2 Columns', 'huge-post-grid'),
+                    '3' => __('3 Columns', 'huge-post-grid'),
+                    '4' => __('4 Columns', 'huge-post-grid'),
+                    '5' => __('5 Columns', 'huge-post-grid'),
+                    '6' => __('6 Columns', 'huge-post-grid'),
+                    '8' => __('8 Columns', 'huge-post-grid'),
+                ],
+                'default'     => '3',
+                'separator' => 'before',
+                'selectors' => [
+                    '{{WRAPPER}} .huge-post-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
+                ],
+                
+            ]
         );
-        $this->add_control(
+
+        $this->add_responsive_control(
             'column_gap',
             [
-                'label' => __('Column Gap', 'elementor-post-grid'),
+                'label' => __('Column Gap', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', 'rem','%'],
                 'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
+                    'px' => ['min' => 0, 'max' => 50],
+                    'em' => ['min' => 0, 'max' => 5],
+                    'rem' => ['min' => 0, 'max' => 5],
+                    '%' => ['min' => 0, 'max' => 100],
                 ],
-                'default' => [
-                    'size' => 30,
-                    'unit' => 'px',
-                ],
+                'default' => ['size' => 20, 'unit' => 'px'],
                 'selectors' => [
                     '{{WRAPPER}} .huge-post-grid' => 'column-gap: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'row_gap',
             [
-                'label' => __('Row Gap', 'elementor-post-grid'),
+                'label' => __('Row Gap', 'huge-post-grid'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', 'rem','%'],
                 'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
+                    'px' => ['min' => 0, 'max' => 50],
+                    'em' => ['min' => 0, 'max' => 5],
+                    'rem' => ['min' => 0, 'max' => 5],
+                    '%' => ['min' => 0, 'max' => 100],
                 ],
-                'default' => [
-                    'size' => 30,
-                    'unit' => 'px',
-                ],
+                'default' => ['size' => 20, 'unit' => 'px'],
                 'selectors' => [
                     '{{WRAPPER}} .huge-post-grid' => 'row-gap: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
+
 
         $this->end_controls_section();
 
@@ -319,7 +323,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_section(
         'section_container_style',
         [
-            'label' => __('Container', 'elementor-post-grid'),
+            'label' => __('Container', 'huge-post-grid'),
             'tab' => \Elementor\Controls_Manager::TAB_STYLE,
         ]
     );
@@ -329,7 +333,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         \Elementor\Group_Control_Background::get_type(),
         [
             'name' => 'container_background',
-            'label' => __('Background', 'elementor-post-grid'),
+            'label' => __('Background', 'huge-post-grid'),
             'types' => ['classic', 'gradient'],
             'selector' => '{{WRAPPER}} .huge-post-item',
         ]
@@ -346,7 +350,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'container_border_radius',
         [
-            'label' => __('Border Radius', 'elementor-post-grid'),
+            'label' => __('Border Radius', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem'],
             'selectors' => [
@@ -366,7 +370,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'container_padding',
         [
-            'label' => __('Padding', 'elementor-post-grid'),
+            'label' => __('Padding', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem', 'em'],
             'selectors' => [
@@ -378,7 +382,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'container_margin',
         [
-            'label' => __('Margin', 'elementor-post-grid'),
+            'label' => __('Margin', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem', 'em'],
             'selectors' => [
@@ -393,14 +397,14 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'container_normal',
         [
-            'label' => __('Normal', 'elementor-post-grid'),
+            'label' => __('Normal', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'container_bg_color',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-item' => 'background-color: {{VALUE}}',
@@ -413,14 +417,14 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'container_hover',
         [
-            'label' => __('Hover', 'elementor-post-grid'),
+            'label' => __('Hover', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'container_bg_color_hover',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-item:hover' => 'background-color: {{VALUE}}',
@@ -431,7 +435,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'container_border_color_hover',
         [
-            'label' => __('Border Color', 'elementor-post-grid'),
+            'label' => __('Border Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-item:hover' => 'border-color: {{VALUE}}',
@@ -443,7 +447,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         \Elementor\Group_Control_Box_Shadow::get_type(),
         [
             'name' => 'container_box_shadow_hover',
-            'label' => __('Box Shadow', 'elementor-post-grid'),
+            'label' => __('Box Shadow', 'huge-post-grid'),
             'selector' => '{{WRAPPER}} .huge-post-item:hover',
         ]
     );
@@ -451,7 +455,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'container_hover_transition',
         [
-            'label' => __('Transition Duration', 'elementor-post-grid'),
+            'label' => __('Transition Duration', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [
                 'px' => [
@@ -475,7 +479,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_section(
         'section_title_style',
         [
-            'label' => __('Title', 'elementor-post-grid'),
+            'label' => __('Title', 'huge-post-grid'),
             'tab' => \Elementor\Controls_Manager::TAB_STYLE,
         ]
     );
@@ -491,7 +495,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'title_color',
         [
-            'label' => __('Color', 'elementor-post-grid'),
+            'label' => __('Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-title a' => 'color: {{VALUE}};',
@@ -502,10 +506,10 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'title_hover_color',
         [
-            'label' => __('Hover Color', 'elementor-post-grid'),
+            'label' => __('Hover Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .huge-post-title a:hover' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .huge-post-item:hover .huge-post-title a' => 'color: {{VALUE}};',
             ],
         ]
     );
@@ -513,19 +517,19 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'title_alignment',
         [
-            'label' => __('Alignment', 'elementor-post-grid'),
+            'label' => __('Alignment', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::CHOOSE,
             'options' => [
                 'left' => [
-                    'title' => __('Left', 'elementor-post-grid'),
+                    'title' => __('Left', 'huge-post-grid'),
                     'icon' => 'eicon-text-align-left',
                 ],
                 'center' => [
-                    'title' => __('Center', 'elementor-post-grid'),
+                    'title' => __('Center', 'huge-post-grid'),
                     'icon' => 'eicon-text-align-center',
                 ],
                 'right' => [
-                    'title' => __('Right', 'elementor-post-grid'),
+                    'title' => __('Right', 'huge-post-grid'),
                     'icon' => 'eicon-text-align-right',
                 ],
             ],
@@ -539,7 +543,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'title_margin',
         [
-            'label' => __('Margin', 'elementor-post-grid'),
+            'label' => __('Margin', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'em'],
             'selectors' => [
@@ -555,8 +559,11 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_section(
         'section_excerpt_style',
         [
-            'label' => __('Excerpt', 'elementor-post-grid'),
+            'label' => __('Content', 'huge-post-grid'),
             'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            'condition' => [
+                    'show_content' => 'yes'
+            ],
         ]
     );
 
@@ -571,7 +578,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'excerpt_color',
         [
-            'label' => __('Color', 'elementor-post-grid'),
+            'label' => __('Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-excerpt' => 'color: {{VALUE}};',
@@ -582,19 +589,19 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'excerpt_alignment',
         [
-            'label' => __('Alignment', 'elementor-post-grid'),
+            'label' => __('Alignment', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::CHOOSE,
             'options' => [
                 'left' => [
-                    'title' => __('Left', 'elementor-post-grid'),
+                    'title' => __('Left', 'huge-post-grid'),
                     'icon' => 'eicon-text-align-left',
                 ],
                 'center' => [
-                    'title' => __('Center', 'elementor-post-grid'),
+                    'title' => __('Center', 'huge-post-grid'),
                     'icon' => 'eicon-text-align-center',
                 ],
                 'right' => [
-                    'title' => __('Right', 'elementor-post-grid'),
+                    'title' => __('Right', 'huge-post-grid'),
                     'icon' => 'eicon-text-align-right',
                 ],
             ],
@@ -608,7 +615,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'excerpt_margin',
         [
-            'label' => __('Margin', 'elementor-post-grid'),
+            'label' => __('Margin', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'em'],
             'selectors' => [
@@ -623,7 +630,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_section(
         'section_category_style',
         [
-            'label' => __('Category', 'elementor-post-grid'),
+            'label' => __('Category', 'huge-post-grid'),
             'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             'condition' => [
                 'show_category' => 'yes',
@@ -645,14 +652,14 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'category_color_normal',
         [
-            'label' => __('Normal', 'elementor-post-grid'),
+            'label' => __('Normal', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'category_text_color',
         [
-            'label' => __('Color', 'elementor-post-grid'),
+            'label' => __('Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-category' => 'color: {{VALUE}};',
@@ -663,7 +670,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'category_bg_color',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-category' => 'background-color: {{VALUE}};',
@@ -676,17 +683,17 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'category_text_color_hover',
         [
-            'label' => __('Hover', 'elementor-post-grid'),
+            'label' => __('Hover', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'category_color_hover',
         [
-            'label' => __('Color', 'elementor-post-grid'),
+            'label' => __('Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .huge-post-category:hover' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .huge-post-item:hover .huge-post-category' => 'color: {{VALUE}};',
             ],
         ]
     );
@@ -694,10 +701,10 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'category_bg_color_hover',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .huge-post-category:hover' => 'background-color: {{VALUE}};',
+                '{{WRAPPER}} .huge-post-item:hover .huge-post-category' => 'background-color: {{VALUE}};',
             ],
         ]
     );
@@ -708,7 +715,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'category_padding',
         [
-            'label' => __('Padding', 'elementor-post-grid'),
+            'label' => __('Padding', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem', 'em'],
             'selectors' => [
@@ -720,7 +727,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'category_border_radius',
         [
-            'label' => __('Border Radius', 'elementor-post-grid'),
+            'label' => __('Border Radius', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem'],
             'selectors' => [
@@ -751,7 +758,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_section(
         'section_author_style',
         [
-            'label' => __('Author', 'elementor-post-grid'),
+            'label' => __('Author', 'huge-post-grid'),
             'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             'condition' => [
                 'show_author' => 'yes',
@@ -773,14 +780,14 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'author_color_normal',
         [
-            'label' => __('Normal', 'elementor-post-grid'),
+            'label' => __('Normal', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'author_text_color',
         [
-            'label' => __('Color', 'elementor-post-grid'),
+            'label' => __('Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-author' => 'color: {{VALUE}};',
@@ -791,7 +798,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'author_bg_color',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-author' => 'background-color: {{VALUE}};',
@@ -804,17 +811,17 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'author_color_hover',
         [
-            'label' => __('Hover', 'elementor-post-grid'),
+            'label' => __('Hover', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'author_text_color_hover',
         [
-            'label' => __('Color', 'elementor-post-grid'),
+            'label' => __('Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .huge-post-author:hover' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .huge-post-item:hover .huge-post-author' => 'color: {{VALUE}};',
             ],
         ]
     );
@@ -822,10 +829,10 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'author_bg_color_hover',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .huge-post-author:hover' => 'background-color: {{VALUE}};',
+                '{{WRAPPER}} .huge-post-item:hover .huge-post-author' => 'background-color: {{VALUE}};',
             ],
         ]
     );
@@ -836,7 +843,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'author_padding',
         [
-            'label' => __('Padding', 'elementor-post-grid'),
+            'label' => __('Padding', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem', 'em'],
             'selectors' => [
@@ -848,7 +855,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'author_border_radius',
         [
-            'label' => __('Border Radius', 'elementor-post-grid'),
+            'label' => __('Border Radius', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem'],
             'selectors' => [
@@ -879,7 +886,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_section(
         'section_date_style',
         [
-            'label' => __('Date', 'elementor-post-grid'),
+            'label' => __('Date', 'huge-post-grid'),
             'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             'condition' => [
                 'show_date' => 'yes',
@@ -901,14 +908,14 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'date_color_normal',
         [
-            'label' => __('Normal', 'elementor-post-grid'),
+            'label' => __('Normal', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'date_text_color',
         [
-            'label' => __('Color', 'elementor-post-grid'),
+            'label' => __('Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-date' => 'color: {{VALUE}};',
@@ -919,7 +926,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'date_bg_color',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-date' => 'background-color: {{VALUE}};',
@@ -932,17 +939,17 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'date_color_hover',
         [
-            'label' => __('Hover', 'elementor-post-grid'),
+            'label' => __('Hover', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'date_text_color_hover',
         [
-            'label' => __('Color', 'elementor-post-grid'),
+            'label' => __('Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .huge-post-date:hover' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .huge-post-item:hover .huge-post-date' => 'color: {{VALUE}};',
             ],
         ]
     );
@@ -950,10 +957,10 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'date_bg_color_hover',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .huge-post-date:hover' => 'background-color: {{VALUE}};',
+                '{{WRAPPER}} .huge-post-item:hover .huge-post-date' => 'background-color: {{VALUE}};',
             ],
         ]
     );
@@ -964,7 +971,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'date_padding',
         [
-            'label' => __('Padding', 'elementor-post-grid'),
+            'label' => __('Padding', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem', 'em'],
             'selectors' => [
@@ -976,7 +983,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'date_border_radius',
         [
-            'label' => __('Border Radius', 'elementor-post-grid'),
+            'label' => __('Border Radius', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem'],
             'selectors' => [
@@ -1007,7 +1014,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_section(
         'section_tags_style',
         [
-            'label' => __('Tags', 'elementor-post-grid'),
+            'label' => __('Tags', 'huge-post-grid'),
             'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             'condition' => [
                 'show_tags' => 'yes',
@@ -1029,14 +1036,14 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'tags_color_normal',
         [
-            'label' => __('Normal', 'elementor-post-grid'),
+            'label' => __('Normal', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'tags_text_color',
         [
-            'label' => __('Text Color', 'elementor-post-grid'),
+            'label' => __('Text Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-tags a' => 'color: {{VALUE}};',
@@ -1047,7 +1054,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'tags_bg_color',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-tags a' => 'background-color: {{VALUE}};',
@@ -1060,17 +1067,17 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'tags_color_hover',
         [
-            'label' => __('Hover', 'elementor-post-grid'),
+            'label' => __('Hover', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'tags_text_color_hover',
         [
-            'label' => __('Text Color', 'elementor-post-grid'),
+            'label' => __('Text Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .huge-post-tags a:hover' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .huge-post-item:hover .huge-post-tags a' => 'color: {{VALUE}};',
             ],
         ]
     );
@@ -1078,10 +1085,10 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'tags_bg_color_hover',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
-                '{{WRAPPER}} .huge-post-tags a:hover' => 'background-color: {{VALUE}};',
+                '{{WRAPPER}} .huge-post-item:hover .huge-post-tags a' => 'background-color: {{VALUE}};',
             ],
         ]
     );
@@ -1093,7 +1100,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'tags_gap',
         [
-            'label' => __('Gap Between Tags', 'elementor-post-grid'),
+            'label' => __('Gap Between Tags', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [
                 'px' => [
@@ -1115,7 +1122,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'tags_padding',
         [
-            'label' => __('Padding', 'elementor-post-grid'),
+            'label' => __('Padding', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem', 'em'],
             'selectors' => [
@@ -1127,7 +1134,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'tags_border_radius',
         [
-            'label' => __('Border Radius', 'elementor-post-grid'),
+            'label' => __('Border Radius', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem'],
             'selectors' => [
@@ -1158,7 +1165,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_section(
         'section_image_style',
         [
-            'label' => __('Image', 'elementor-post-grid'),
+            'label' => __('Image', 'huge-post-grid'),
             'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             'condition' => [
                 'show_image' => 'yes',
@@ -1177,7 +1184,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'image_border_radius',
         [
-            'label' => __('Border Radius', 'elementor-post-grid'),
+            'label' => __('Border Radius', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem'],
             'selectors' => [
@@ -1198,7 +1205,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'image_padding',
         [
-            'label' => __('Padding', 'elementor-post-grid'),
+            'label' => __('Padding', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem', 'em'],
             'selectors' => [
@@ -1210,7 +1217,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'image_margin',
         [
-            'label' => __('Margin', 'elementor-post-grid'),
+            'label' => __('Margin', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem', 'em'],
             'selectors' => [
@@ -1223,7 +1230,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'image_overlay_heading',
         [
-            'label' => __('Image Overlay', 'elementor-post-grid'),
+            'label' => __('Image Overlay', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::HEADING,
             'separator' => 'before',
         ]
@@ -1233,13 +1240,13 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'image_overlay_type',
         [
-            'label' => __('Overlay Type', 'elementor-post-grid'),
+            'label' => __('Overlay Type', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::SELECT,
             'default' => 'default',
             'options' => [
-                'default' => __('Default', 'elementor-post-grid'),
-                'color' => __('Color', 'elementor-post-grid'),
-                'gradient' => __('Gradient', 'elementor-post-grid'),
+                'default' => __('Default', 'huge-post-grid'),
+                'color' => __('Color', 'huge-post-grid'),
+                'gradient' => __('Gradient', 'huge-post-grid'),
             ],
         ]
     );
@@ -1248,7 +1255,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'image_overlay_color',
         [
-            'label' => __('Overlay Color', 'elementor-post-grid'),
+            'label' => __('Overlay Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-overlay' => 'background-color: {{VALUE}};',
@@ -1264,7 +1271,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         \Elementor\Group_Control_Background::get_type(),
         [
             'name' => 'image_overlay_gradient',
-            'label' => __('Overlay Gradient', 'elementor-post-grid'),
+            'label' => __('Overlay Gradient', 'huge-post-grid'),
             'types' => ['gradient'],
             'selector' => '{{WRAPPER}} .huge-post-overlay',
             'condition' => [
@@ -1277,7 +1284,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'image_overlay_opacity',
         [
-            'label' => __('Overlay Opacity', 'elementor-post-grid'),
+            'label' => __('Overlay Opacity', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [
                 'px' => [
@@ -1311,7 +1318,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'image_hover_effects_heading',
         [
-            'label' => __('Hover Effects', 'elementor-post-grid'),
+            'label' => __('Hover Effects', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::HEADING,
             'separator' => 'before',
             'condition' => [
@@ -1324,7 +1331,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'image_overlay_opacity_hover',
         [
-            'label' => __('Hover Overlay Opacity', 'elementor-post-grid'),
+            'label' => __('Hover Overlay Opacity', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'range' => [
                 'px' => [
@@ -1360,7 +1367,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_section(
         'section_readmore_style',
         [
-            'label' => __('Read More', 'elementor-post-grid'),
+            'label' => __('Read More', 'huge-post-grid'),
             'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             'condition' => [
                 'show_readmore' => 'yes', 
@@ -1383,14 +1390,14 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'readmore_color_normal',
         [
-            'label' => __('Normal', 'elementor-post-grid'),
+            'label' => __('Normal', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'readmore_text_color',
         [
-            'label' => __('Text Color', 'elementor-post-grid'),
+            'label' => __('Text Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-read-more' => 'color: {{VALUE}};',
@@ -1401,7 +1408,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'readmore_bg_color',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-read-more' => 'background-color: {{VALUE}};',
@@ -1415,14 +1422,14 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'readmore_color_hover',
         [
-            'label' => __('Hover', 'elementor-post-grid'),
+            'label' => __('Hover', 'huge-post-grid'),
         ]
     );
 
     $this->add_control(
         'readmore_text_color_hover',
         [
-            'label' => __('Text Color', 'elementor-post-grid'),
+            'label' => __('Text Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-item:hover .huge-read-more' => 'color: {{VALUE}};',
@@ -1433,7 +1440,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'readmore_bg_color_hover',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .huge-post-item:hover .huge-read-more' => 'background-color: {{VALUE}};',
@@ -1448,7 +1455,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'readmore_margin',
         [
-            'label' => __('Margin', 'elementor-post-grid'),
+            'label' => __('Margin', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem', 'em'],
             'selectors' => [
@@ -1460,7 +1467,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'readmore_padding',
         [
-            'label' => __('Padding', 'elementor-post-grid'),
+            'label' => __('Padding', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem', 'em'],
             'selectors' => [
@@ -1480,7 +1487,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'readmore_border_radius',
         [
-            'label' => __('Border Radius', 'elementor-post-grid'),
+            'label' => __('Border Radius', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'rem'],
             'selectors' => [
@@ -1503,7 +1510,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_section(
         'section_pagination_style',
         [
-            'label' => __('Pagination', 'elementor-post-grid'),
+            'label' => __('Pagination', 'huge-post-grid'),
             'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             'condition' => [
                     'show_pagination' => 'yes',
@@ -1518,7 +1525,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'load_more_normal',
         [
-            'label' => __('Load More', 'elementor-post-grid'),
+            'label' => __('Load More', 'huge-post-grid'),
             'condition' => [
                 'pagination_type' => 'load_more',
             ],
@@ -1528,7 +1535,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'load_more_text_color',
         [
-            'label' => __('Text Color', 'elementor-post-grid'),
+            'label' => __('Text Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .load-more-btn' => 'color: {{VALUE}};',
@@ -1542,7 +1549,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'load_more_bg_color',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .load-more-btn' => 'background-color: {{VALUE}};',
@@ -1578,7 +1585,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'load_more_border_radius',
         [
-            'label' => __('Border Radius', 'elementor-post-grid'),
+            'label' => __('Border Radius', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'em'],
             'selectors' => [
@@ -1593,7 +1600,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'load_more_padding',
         [
-            'label' => __('Padding', 'elementor-post-grid'),
+            'label' => __('Padding', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', 'em', '%'],
             'selectors' => [
@@ -1622,7 +1629,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->start_controls_tab(
         'load_more_hover',
         [
-            'label' => __('Hover', 'elementor-post-grid'),
+            'label' => __('Hover', 'huge-post-grid'),
             'condition' => [
                 'pagination_type' => 'load_more',
             ],
@@ -1632,7 +1639,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'load_more_text_color_hover',
         [
-            'label' => __('Text Color', 'elementor-post-grid'),
+            'label' => __('Text Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .load-more-btn:hover' => 'color: {{VALUE}};',
@@ -1646,7 +1653,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'load_more_bg_color_hover',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .load-more-btn:hover' => 'background-color: {{VALUE}};',
@@ -1660,7 +1667,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'load_more_border_color_hover',
         [
-            'label' => __('Border Color', 'elementor-post-grid'),
+            'label' => __('Border Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .load-more-btn:hover' => 'border-color: {{VALUE}};',
@@ -1689,7 +1696,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'pagination_numbers_heading',
         [
-            'label' => __('Numbered Pagination', 'elementor-post-grid'),
+            'label' => __('Numbered Pagination', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::HEADING,
             'separator' => 'before',
             'condition' => [
@@ -1712,7 +1719,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'pagination_numbers_color',
         [
-            'label' => __('Text Color', 'elementor-post-grid'),
+            'label' => __('Text Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .post-grid-pagination a' => 'color: {{VALUE}};',
@@ -1726,7 +1733,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'pagination_numbers_bg_color',
         [
-            'label' => __('Background Color', 'elementor-post-grid'),
+            'label' => __('Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .post-grid-pagination a' => 'background-color: {{VALUE}};',
@@ -1740,7 +1747,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'pagination_numbers_active_color',
         [
-            'label' => __('Active Text Color', 'elementor-post-grid'),
+            'label' => __('Active Text Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .post-grid-pagination .current' => 'color: {{VALUE}};',
@@ -1754,7 +1761,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'pagination_numbers_active_bg_color',
         [
-            'label' => __('Active Background Color', 'elementor-post-grid'),
+            'label' => __('Active Background Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .post-grid-pagination .current' => 'background-color: {{VALUE}};',
@@ -1768,7 +1775,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_control(
         'pagination_numbers_active_border_color',
         [
-            'label' => __('Active Border Color', 'elementor-post-grid'),
+            'label' => __('Active Border Color', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::COLOR,
             'selectors' => [
                 '{{WRAPPER}} .post-grid-pagination .current' => 'border-color: {{VALUE}};',
@@ -1793,7 +1800,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'pagination_numbers_padding',
         [
-            'label' => __('Padding', 'elementor-post-grid'),
+            'label' => __('Padding', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', 'em', '%'],
             'selectors' => [
@@ -1808,7 +1815,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'pagination_numbers_border_radius',
         [
-            'label' => __('Border Radius', 'elementor-post-grid'),
+            'label' => __('Border Radius', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'em'],
             'selectors' => [
@@ -1823,7 +1830,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'pagination_numbers_gap',
         [
-            'label' => __('Gap Between Items', 'elementor-post-grid'),
+            'label' => __('Gap Between Items', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::SLIDER,
             'size_units' => ['px'],
             'range' => [
@@ -1844,19 +1851,19 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'pagination_alignment',
         [
-            'label' => __('Alignment', 'elementor-post-grid'),
+            'label' => __('Alignment', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::CHOOSE,
             'options' => [
                 'left' => [
-                    'title' => __('Left', 'elementor-post-grid'),
+                    'title' => __('Left', 'huge-post-grid'),
                     'icon' => 'eicon-text-align-left',
                 ],
                 'center' => [
-                    'title' => __('Center', 'elementor-post-grid'),
+                    'title' => __('Center', 'huge-post-grid'),
                     'icon' => 'eicon-text-align-center',
                 ],
                 'right' => [
-                    'title' => __('Right', 'elementor-post-grid'),
+                    'title' => __('Right', 'huge-post-grid'),
                     'icon' => 'eicon-text-align-right',
                 ],
             ],
@@ -1871,7 +1878,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     $this->add_responsive_control(
         'pagination_margin',
         [
-            'label' => __('Margin', 'elementor-post-grid'),
+            'label' => __('Margin', 'huge-post-grid'),
             'type' => \Elementor\Controls_Manager::DIMENSIONS,
             'size_units' => ['px', '%', 'em'],
             'selectors' => [
@@ -1884,89 +1891,10 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     
     }
     public function get_script_depends() {
-        return ['elementor-post-grid'];
+        // return ['elementor-post-grid'];
+        return ['post-grid-loadmore', 'post-grid-pagination'];
     }
 
-
-// protected function render() {
-//     $settings = $this->get_settings_for_display();
-    
-//     // Common query setup
-//     $query_args = [
-//         'post_type'      => 'post',
-//         'posts_per_page' => ($settings['pagination_type'] === 'none') ? -1 : $settings['posts_per_page'],
-//         'paged'          => max(1, get_query_var('paged'), get_query_var('page')),
-//     ];
-    
-//     if (!empty($settings['selected_category'])) {
-//         $query_args['category_name'] = $settings['selected_category'];
-//     }
-    
-//     $query = new WP_Query($query_args);
-    
-//     if ($query->have_posts()) {
-//         // echo '<div class="custom-post-grid style-' . esc_attr($settings['post_style']) . '">';
-//         echo '<div class="huge-post-grid ep-post-grid huge-post-grid-' . esc_attr($settings['post_style']) . ' huge-post-columns-' . esc_attr($settings['columns']) . '">';
-        
-//         while ($query->have_posts()) {
-//             $query->the_post();
-            
-//             // Call the appropriate style renderer8
-//             $this->render_post_style($settings['post_style'], $settings);
-//         }
-        
-//         echo '</div>';
-        
-//         // Handle pagination (same as before)
-//         // $this->render_pagination($query, $settings);
-
-//         // Handle pagination only if enabled
-//         if ($settings['show_pagination'] === 'yes') {
-//             $this->render_pagination($query, $settings);
-//         }
-        
-//         wp_reset_postdata();
-//     } else {
-//         echo '<p>' . __('No posts found', 'elementor-post-grid') . '</p>';
-//     }
-// }
-// // new 
-// protected function render() {
-//     $settings = $this->get_settings_for_display();
-//     $unique_id = 'huge-post-grid-' . $this->get_id(); // Unique ID for each widget instance
-    
-//     // Common query setup
-//     $query_args = [
-//         'post_type'      => 'post',
-//         'posts_per_page' => ($settings['pagination_type'] === 'none') ? -1 : $settings['posts_per_page'],
-//         'paged'          => max(1, get_query_var('paged'), get_query_var('page')),
-//     ];
-    
-//     if (!empty($settings['selected_category'])) {
-//         $query_args['category_name'] = $settings['selected_category'];
-//     }
-    
-//     $query = new WP_Query($query_args);
-    
-//     if ($query->have_posts()) {
-//         echo '<div id="' . esc_attr($unique_id) . '" class="huge-post-grid ep-post-grid huge-post-grid-' . esc_attr($settings['post_style']) . ' huge-post-columns-' . esc_attr($settings['columns']) . '">';
-        
-//         while ($query->have_posts()) {
-//             $query->the_post();
-//             $this->render_post_style($settings['post_style'], $settings);
-//         }
-        
-//         echo '</div>';
-        
-//         if ($settings['show_pagination'] === 'yes') {
-//             $this->render_pagination($query, $settings, $unique_id);
-//         }
-        
-//         wp_reset_postdata();
-//     } else {
-//         echo '<p>' . __('No posts found', 'elementor-post-grid') . '</p>';
-//     }
-// }
 
 protected function render() {
     $settings = $this->get_settings_for_display();
@@ -1980,12 +1908,12 @@ protected function render() {
           data-show-image="' . esc_attr($settings['show_image']) . '"
           data-show-category="' . esc_attr($settings['show_category']) . '"
           data-show-content="' . esc_attr($settings['show_content']) . '"
+          data-content-type="' . esc_attr($settings['content_type']) . '"
           data-show-author="' . esc_attr($settings['show_author']) . '"
           data-show-date="' . esc_attr($settings['show_date']) . '"
           data-image-size="' . esc_attr($settings['image_size']) . '"
           data-title-word-limit="' . esc_attr($settings['title_word_limit']) . '"
-          data-content-word-limit="' . esc_attr($settings['content_word_limit']) . '"
-          data-columns="' . esc_attr($settings['columns']) . '">';
+          data-content-word-limit="' . esc_attr($settings['content_word_limit']) . '">';
     
     // Initial query
     $query_args = [
@@ -1998,7 +1926,8 @@ protected function render() {
     $query = new WP_Query($query_args);
     
     if ($query->have_posts()) {
-        echo '<div id="' . esc_attr($unique_id) . '" class="huge-post-grid ep-post-grid huge-post-grid-' . esc_attr($settings['post_style']) . ' huge-post-columns-' . esc_attr($settings['columns']) . '">';
+        // echo '<div id="' . esc_attr($unique_id) . '" class="huge-post-grid ep-post-grid huge-post-grid-' . esc_attr($settings['post_style']) . ' huge-post-columns-' . esc_attr($settings['columns']) . '">';
+        echo '<div id="' . esc_attr($unique_id) . '" class="huge-post-grid ep-post-grid huge-post-grid-' . esc_attr($settings['post_style']) .'">';
         
         while ($query->have_posts()) {
             $query->the_post();
@@ -2021,63 +1950,9 @@ protected function render() {
 
 
 protected function render_post_style($style, $settings) {
-    ep_render_post_style($style, $settings);
+    huge_render_post_style($style, $settings);
 }
 
-// protected function render_pagination($query, $settings) {
-//     if ($settings['pagination_type'] === 'load_more') {
-//         $max_pages = $query->max_num_pages;
-//         if ($max_pages > 1) {
-//             echo '<div class="load-more-wrapper">';
-//             echo '<button id="load-more-posts" class="load-more-btn" 
-//                       data-page="1" 
-//                       data-max-pages="' . esc_attr($max_pages) . '"
-//                       data-posts-per-page="' . esc_attr($settings['posts_per_page']) . '"
-//                       data-category="' . esc_attr($settings['selected_category']) . '"
-//                       data-post-style="' . esc_attr($settings['post_style']) . '"
-                      
-//                       data-show-image="' . esc_attr($settings['show_image']) . '"
-//                       data-show-category="' . esc_attr($settings['show_category']) . '"
-//                       data-show-content="' . esc_attr($settings['show_content']) . '"
-//                       data-show-author="' . esc_attr($settings['show_author']) . '"
-//                       data-show-date="' . esc_attr($settings['show_date']) . '"
-//                       data-image-size="' . esc_attr($settings['image_size']) . '"
-//                       data-title-word-limit="' . esc_attr($settings['title_word_limit']) . '"
-//                       data-content-word-limit="' . esc_attr($settings['content_word_limit']) . '">'
-//                    . __('Load More', 'elementor-post-grid') . '</button>';
-//             echo '</div>';
-//         }
-//     } elseif ($settings['pagination_type'] === 'pagination') {
-//         $total_pages = $query->max_num_pages;
-//         if ($total_pages > 1) {
-//             $current_page = max(1, get_query_var('paged'), get_query_var('page'));
-            
-//             // Get the base URL
-//             $base = html_entity_decode(get_pagenum_link());
-//             $base = add_query_arg('paged', '%#%', $base);
-            
-//             // Fix for home URL pagination
-//             if (is_front_page()) {
-//                 $base = home_url('page/%#%/');
-//             }
-            
-//             echo '<div class="post-grid-pagination">';
-//             echo paginate_links([
-//                 'base'      => $base,
-//                 'format'    => '?paged=%#%',
-//                 'current'   => $current_page,
-//                 'total'     => $total_pages,
-//                 'prev_text' => __('« Prev', 'elementor-post-grid'),
-//                 'next_text' => __('Next »', 'elementor-post-grid'),
-//                 'type'      => 'list',
-//                 'end_size'  => 1,
-//                 'mid_size'  => 2,
-//                 'add_args'  => false,
-//             ]);
-//             echo '</div>';
-//         }
-//     }
-// }
 
 // fixed
 // protected function render_pagination($query, $settings) {
@@ -2137,63 +2012,6 @@ protected function render_post_style($style, $settings) {
 //     }
 // }
 
-// new
-// protected function render_pagination($query, $settings, $unique_id) {
-//     if ($settings['pagination_type'] === 'load_more') {
-//         $max_pages = $query->max_num_pages;
-//         if ($max_pages > 1) {
-//             echo '<div class="load-more-wrapper">';
-//             echo '<button class="load-more-btn" 
-//                       data-container="' . esc_attr($unique_id) . '"
-//                       data-page="1" 
-//                       data-max-pages="' . esc_attr($max_pages) . '"
-//                       data-posts-per-page="' . esc_attr($settings['posts_per_page']) . '"
-//                       data-category="' . esc_attr($settings['selected_category']) . '"
-//                       data-post-style="' . esc_attr($settings['post_style']) . '"
-//                       data-show-image="' . esc_attr($settings['show_image']) . '"
-//                       data-show-category="' . esc_attr($settings['show_category']) . '"
-//                       data-show-content="' . esc_attr($settings['show_content']) . '"
-//                       data-show-author="' . esc_attr($settings['show_author']) . '"
-//                       data-show-date="' . esc_attr($settings['show_date']) . '"
-//                       data-image-size="' . esc_attr($settings['image_size']) . '"
-//                       data-title-word-limit="' . esc_attr($settings['title_word_limit']) . '"
-//                       data-content-word-limit="' . esc_attr($settings['content_word_limit']) . '">'
-//                    . __('Load More', 'elementor-post-grid') 
-//                    . '<span class="spinner"></span></button>';
-//             echo '</div>';
-//         }
-//     } elseif ($settings['pagination_type'] === 'pagination') {
-//         $total_pages = $query->max_num_pages;
-//         if ($total_pages > 1) {
-//             $current_page = max(1, get_query_var('paged'), get_query_var('page'));
-            
-//             // Get the base URL
-//             $base = html_entity_decode(get_pagenum_link());
-//             $base = add_query_arg('paged', '%#%', $base);
-            
-//             // Fix for home URL pagination
-//             if (is_front_page()) {
-//                 $base = home_url('page/%#%/');
-//             }
-            
-//             echo '<div class="post-grid-pagination">';
-//             echo paginate_links([
-//                 'base'      => $base,
-//                 'format'    => '?paged=%#%',
-//                 'current'   => $current_page,
-//                 'total'     => $total_pages,
-//                 'prev_text' => __('« Previous', 'elementor-post-grid'),
-//                 'next_text' => __('Next »', 'elementor-post-grid'),
-//                 'type'      => 'list',
-//                 'end_size'  => 1,
-//                 'mid_size'  => 2,
-//                 'add_args'  => false,
-//             ]);
-//             echo '</div>';
-//         }
-//     }
-// }
-
 protected function render_pagination($query, $settings, $unique_id) {
     if ($settings['pagination_type'] === 'load_more') {
         $max_pages = $query->max_num_pages;
@@ -2209,13 +2027,13 @@ protected function render_pagination($query, $settings, $unique_id) {
                       data-show-image="' . esc_attr($settings['show_image']) . '"
                       data-show-category="' . esc_attr($settings['show_category']) . '"
                       data-show-content="' . esc_attr($settings['show_content']) . '"
+                      data-content-type="' . esc_attr($settings['content_type']) . '"
                       data-show-author="' . esc_attr($settings['show_author']) . '"
                       data-show-date="' . esc_attr($settings['show_date']) . '"
                       data-image-size="' . esc_attr($settings['image_size']) . '"
                       data-title-word-limit="' . esc_attr($settings['title_word_limit']) . '"
-                      data-content-word-limit="' . esc_attr($settings['content_word_limit']) . '"
-                      data-columns="' . esc_attr($settings['columns']) . '">'
-                   . __('Load More', 'elementor-post-grid') 
+                      data-content-word-limit="' . esc_attr($settings['content_word_limit']) . '" >'
+                   . __('Load More', 'huge-post-grid') 
                    . '</button>';
             echo '</div>';
         }
@@ -2230,8 +2048,8 @@ protected function render_pagination($query, $settings, $unique_id) {
                 'format' => '?paged=%#%',
                 'current' => $current_page,
                 'total' => $total_pages,
-                'prev_text' => __('« Previous', 'elementor-post-grid'),
-                'next_text' => __('Next »', 'elementor-post-grid'),
+                'prev_text' => __('« Previous', 'huge-post-grid'),
+                'next_text' => __('Next »', 'huge-post-grid'),
                 'type' => 'list',
                 'end_size' => 1,
                 'mid_size' => 2,
