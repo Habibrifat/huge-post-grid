@@ -6,6 +6,7 @@
 
 .huge-post-item {
   position: relative;
+  overflow: hidden;
 }
 .huge-post-thumbnail {
   position: relative;
@@ -464,7 +465,7 @@
   line-height: 1.6;
 }
 
-.huge-post-item.huge-post-style-5 .huge-post-readmore {
+.huge-post-item.huge-post-style-5 .huge-read-more {
   position: absolute;
   right: 25px;
   bottom: 25px;
@@ -495,7 +496,7 @@
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
-.huge-post-item.huge-post-style-5:hover .huge-post-readmore {
+.huge-post-item.huge-post-style-5:hover .huge-read-more {
   background: #005177;
   transform: rotate(45deg);
 }
@@ -587,7 +588,7 @@
 .huge-post-style-6 .huge-post-tags a {
   color: rgba(255, 255, 255, 0.9);
 }
-.huge-post-style-6 .huge-post-readmore {
+.huge-post-style-6 .huge-read-more {
   color: #fff;
   font-weight: 600;
   text-decoration: none;
@@ -595,7 +596,7 @@
   padding-right: 20px;
 }
 
-.huge-post-style-6 .huge-post-readmore:after {
+.huge-post-style-6 .huge-read-more:after {
   content: "→";
   position: absolute;
   right: 0;
@@ -612,7 +613,7 @@
   transform: scale(1.05);
 }
 
-.huge-post-style-6:hover .huge-post-readmore:after {
+.huge-post-style-6:hover .huge-read-more:after {
   transform: translateX(3px);
 }
 
@@ -752,7 +753,7 @@
   border-radius: 8px;
 }
 
-.huge-post-style-8 .post-tags a {
+.huge-post-style-8 .huge-post-tags a {
   display: inline-block;
   background: #f5f5f5;
   color: #000000;
@@ -815,7 +816,7 @@
   margin-top: 15px;
   position: relative;
 }
-.huge-post-style-9 .post-tags a {
+.huge-post-style-9 .huge-post-tags a {
   display: inline-block;
   background: #f5f5f5;
   color: #000000;

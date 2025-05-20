@@ -46,7 +46,6 @@ function post_grid_enqueue_assets() {
 }
 add_action('wp_enqueue_scripts', 'post_grid_enqueue_assets');
 
-
 // Include the renderers file from widgets folder
 require_once plugin_dir_path(__FILE__) . 'widgets/post-grid-renderers.php';
 

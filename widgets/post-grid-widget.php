@@ -555,7 +555,7 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
 
     $this->end_controls_section();
 
-    // Excerpt Style
+    // Content Style
     $this->start_controls_section(
         'section_excerpt_style',
         [
@@ -583,6 +583,55 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
             'selectors' => [
                 '{{WRAPPER}} .huge-post-excerpt' => 'color: {{VALUE}};',
             ],
+        ]
+    );
+    $this->add_control(
+        'content_background',
+        [
+            'label' => __('Content Background', 'huge-post-grid'),
+            'type' => \Elementor\Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .huge-post-content' => 'background-color: {{VALUE}};',
+            ],
+        ]
+    );
+
+    $this->add_responsive_control(
+        'content_padding',
+        [
+            'label' => __('Padding', 'huge-post-grid'),
+            'type' => \Elementor\Controls_Manager::DIMENSIONS,
+            'size_units' => ['px', '%', 'rem', 'em'],
+            'selectors' => [
+                '{{WRAPPER}} .huge-post-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]
+    );
+        $this->add_group_control(
+        \Elementor\Group_Control_Border::get_type(),
+        [
+            'name' => 'content_border',
+            'selector' => '{{WRAPPER}} .huge-post-content',
+        ]
+    );
+
+    $this->add_responsive_control(
+        'content_border_radius',
+        [
+            'label' => __('Border Radius', 'huge-post-grid'),
+            'type' => \Elementor\Controls_Manager::DIMENSIONS,
+            'size_units' => ['px', '%', 'rem'],
+            'selectors' => [
+                '{{WRAPPER}} .huge-post-content' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]
+    );
+
+    $this->add_group_control(
+        \Elementor\Group_Control_Box_Shadow::get_type(),
+        [
+            'name' => 'content_box_shadow',
+            'selector' => '{{WRAPPER}} .huge-post-content',
         ]
     );
 
@@ -1127,6 +1176,17 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
             'size_units' => ['px', '%', 'rem', 'em'],
             'selectors' => [
                 '{{WRAPPER}} .huge-post-tags a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]
+    );
+    $this->add_responsive_control(
+        'tags_margin',
+        [
+            'label' => __('Margin', 'huge-post-grid'),
+            'type' => \Elementor\Controls_Manager::DIMENSIONS,
+            'size_units' => ['px', '%', 'rem', 'em'],
+            'selectors' => [
+                '{{WRAPPER}} .huge-post-tags a' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
             ],
         ]
     );

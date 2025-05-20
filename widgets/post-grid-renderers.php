@@ -278,7 +278,7 @@ function render_huge_style5($settings) {
         echo '<div class="huge-post-excerpt">'. wp_kses_post($content) . '</div>';
     }
     
-    echo '<a href="' . get_permalink() . '" class="huge-post-readmore"><i class="fas fa-arrow-right"></i></a>';
+    echo '<a href="' . get_permalink() . '" class="huge-read-more"><i class="fas fa-arrow-right"></i></a>';
     
     echo '</div>';
     echo '</div>';
@@ -329,7 +329,7 @@ function render_huge_style6($settings) {
         }
     }
     if ($settings['show_readmore'] === 'yes') {
-        echo '<a href="' . get_permalink() . '" class="huge-post-readmore">Read More</a>';
+        echo '<a href="' . get_permalink() . '" class="huge-read-more">Read More</a>';
     }
     echo '</div>';
     
@@ -451,7 +451,7 @@ function render_huge_style8($settings) {
     if ($settings['show_tags'] === 'yes') {
         $tags = get_the_tags();
         if (!empty($tags)) {
-            echo '<div class="post-tags">';
+            echo '<div class="huge-post-tags">';
             foreach ($tags as $tag) {
                 echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
             }
@@ -516,7 +516,7 @@ function render_huge_style9($settings) {
     if ($settings['show_tags'] === 'yes') {
         $tags = get_the_tags();
         if (!empty($tags)) {
-            echo '<div class="post-tags">';
+            echo '<div class="huge-post-tags">';
             foreach ($tags as $tag) {
                 echo '<a href="' . esc_url(get_tag_link($tag->term_id)) . '">' . esc_html($tag->name) . '</a>';
             }
