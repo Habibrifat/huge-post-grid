@@ -800,6 +800,31 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
             'selector' => '{{WRAPPER}} .huge-post-category',
         ]
     );
+    $this->add_responsive_control(
+        'category_alignment',
+        [
+            'label' => __('Alignment', 'huge-post-grid'),
+            'type' => \Elementor\Controls_Manager::CHOOSE,
+            'options' => [
+                'left' => [
+                    'title' => __('Left', 'huge-post-grid'),
+                    'icon' => 'eicon-text-align-left',
+                ],
+                'center' => [
+                    'title' => __('Center', 'huge-post-grid'),
+                    'icon' => 'eicon-text-align-center',
+                ],
+                'right' => [
+                    'title' => __('Right', 'huge-post-grid'),
+                    'icon' => 'eicon-text-align-right',
+                ],
+            ],
+            'default' => 'left',
+            'selectors' => [
+                '{{WRAPPER}} .huge-post-category' => 'text-align: {{VALUE}};',
+            ],
+        ]
+    );
 
     $this->end_controls_section();
 
@@ -1076,6 +1101,31 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
         [
             'name' => 'tags_typography',
             'selector' => '{{WRAPPER}} .huge-post-tags, {{WRAPPER}} .huge-post-tags a',
+        ]
+    );
+    $this->add_responsive_control(
+        'tag_alignment',
+        [
+            'label' => __('Alignment', 'huge-post-grid'),
+            'type' => \Elementor\Controls_Manager::CHOOSE,
+            'options' => [
+                'left' => [
+                    'title' => __('Left', 'huge-post-grid'),
+                    'icon' => 'eicon-text-align-left',
+                ],
+                'center' => [
+                    'title' => __('Center', 'huge-post-grid'),
+                    'icon' => 'eicon-text-align-center',
+                ],
+                'right' => [
+                    'title' => __('Right', 'huge-post-grid'),
+                    'icon' => 'eicon-text-align-right',
+                ],
+            ],
+            'default' => 'left',
+            'selectors' => [
+                '{{WRAPPER}} .huge-post-tags, {{WRAPPER}} .huge-post-tags a' => 'text-align: {{VALUE}};',
+            ],
         ]
     );
 
@@ -1422,6 +1472,190 @@ class Post_Grid_Widget extends \Elementor\Widget_Base {
     );
 
     $this->end_controls_section();
+
+    // Comments Style
+$this->start_controls_section(
+    'section_comments_style',
+    [
+        'label' => __('Comments', 'huge-post-grid'),
+        'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+        'condition' => [
+            'show_comments' => 'yes',
+        ],
+    ]
+);
+
+$this->add_group_control(
+    \Elementor\Group_Control_Typography::get_type(),
+    [
+        'name' => 'comments_typography',
+        'selector' => '{{WRAPPER}} .huge-post-comments',
+    ]
+);
+
+// Comments color tabs
+$this->start_controls_tabs('comments_colors');
+
+$this->start_controls_tab(
+    'comments_color_normal',
+    [
+        'label' => __('Normal', 'huge-post-grid'),
+    ]
+);
+
+$this->add_control(
+    'comments_text_color',
+    [
+        'label' => __('Color', 'huge-post-grid'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+            '{{WRAPPER}} .huge-post-comments' => 'color: {{VALUE}};',
+        ],
+    ]
+);
+
+$this->add_control(
+    'comments_bg_color',
+    [
+        'label' => __('Background Color', 'huge-post-grid'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+            '{{WRAPPER}} .huge-post-comments' => 'background-color: {{VALUE}};',
+        ],
+    ]
+);
+
+$this->end_controls_tab();
+
+$this->start_controls_tab(
+    'comments_color_hover',
+    [
+        'label' => __('Hover', 'huge-post-grid'),
+    ]
+);
+
+$this->add_control(
+    'comments_text_color_hover',
+    [
+        'label' => __('Color', 'huge-post-grid'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+            '{{WRAPPER}} .huge-post-item:hover .huge-post-comments' => 'color: {{VALUE}};',
+        ],
+    ]
+);
+
+$this->add_control(
+    'comments_bg_color_hover',
+    [
+        'label' => __('Background Color', 'huge-post-grid'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+            '{{WRAPPER}} .huge-post-item:hover .huge-post-comments' => 'background-color: {{VALUE}};',
+        ],
+    ]
+);
+
+$this->end_controls_tab();
+$this->end_controls_tabs();
+
+$this->add_responsive_control(
+    'comments_padding',
+    [
+        'label' => __('Padding', 'huge-post-grid'),
+        'type' => \Elementor\Controls_Manager::DIMENSIONS,
+        'size_units' => ['px', '%', 'rem', 'em'],
+        'selectors' => [
+            '{{WRAPPER}} .huge-post-comments' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+        ],
+    ]
+);
+
+$this->add_responsive_control(
+    'comments_border_radius',
+    [
+        'label' => __('Border Radius', 'huge-post-grid'),
+        'type' => \Elementor\Controls_Manager::DIMENSIONS,
+        'size_units' => ['px', '%', 'rem'],
+        'selectors' => [
+            '{{WRAPPER}} .huge-post-comments' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+        ],
+    ]
+);
+
+$this->add_group_control(
+    \Elementor\Group_Control_Border::get_type(),
+    [
+        'name' => 'comments_border',
+        'selector' => '{{WRAPPER}} .huge-post-comments',
+    ]
+);
+
+$this->add_group_control(
+    \Elementor\Group_Control_Box_Shadow::get_type(),
+    [
+        'name' => 'comments_box_shadow',
+        'selector' => '{{WRAPPER}} .huge-post-comments',
+    ]
+);
+
+$this->add_control(
+    'comments_icon_heading',
+    [
+        'label' => __('Icon', 'huge-post-grid'),
+        'type' => \Elementor\Controls_Manager::HEADING,
+        'separator' => 'before',
+    ]
+);
+
+$this->add_control(
+    'comments_icon_color',
+    [
+        'label' => __('Icon Color', 'huge-post-grid'),
+        'type' => \Elementor\Controls_Manager::COLOR,
+        'selectors' => [
+            '{{WRAPPER}} .huge-post-comments i' => 'color: {{VALUE}};',
+        ],
+    ]
+);
+
+$this->add_control(
+    'comments_icon_size',
+    [
+        'label' => __('Icon Size', 'huge-post-grid'),
+        'type' => \Elementor\Controls_Manager::SLIDER,
+        'size_units' => ['px', 'em', 'rem'],
+        'range' => [
+            'px' => [
+                'min' => 1,
+                'max' => 100,
+            ],
+        ],
+        'selectors' => [
+            '{{WRAPPER}} .huge-post-comments i' => 'font-size: {{SIZE}}{{UNIT}};',
+        ],
+    ]
+);
+
+$this->add_responsive_control(
+    'comments_icon_spacing',
+    [
+        'label' => __('Icon Spacing', 'huge-post-grid'),
+        'type' => \Elementor\Controls_Manager::SLIDER,
+        'size_units' => ['px', 'em', 'rem'],
+        'range' => [
+            'px' => [
+                'min' => 0,
+                'max' => 50,
+            ],
+        ],
+        'selectors' => [
+            '{{WRAPPER}} .huge-post-comments i' => 'margin-right: {{SIZE}}{{UNIT}};',
+        ],
+    ]
+);
+
+$this->end_controls_section();
 
     // Read More Style
     $this->start_controls_section(

@@ -792,7 +792,7 @@
 .huge-post-style-9 .huge-post-tilt-box {
   transform-style: preserve-3d;
   transition: all 0.5s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); */
   border-radius: 8px;
   overflow: hidden;
 }
@@ -840,7 +840,7 @@
 
 .huge-post-style-9:hover .huge-post-tilt-box {
   transform: rotateY(5deg) rotateX(2deg);
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15); */
 }
 
 .huge-post-style-9:hover .huge-read-more:after {
